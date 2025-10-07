@@ -1,6 +1,30 @@
-# Welcome to your Expo app 👋
+# GeoLearn Mobile App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## C4 diagrams
+
+Below you'll find C4 model diagrams of the application.
+
+### Context Diagram (C1)
+
+<img width="883" height="762" alt="GeoLearn_C1" src="https://github.com/user-attachments/assets/af0cbfe6-c320-4433-9dd5-9b514d2be7d3" />
+
+### Container Diagram (C2)
+
+<img width="610" height="1085" alt="GeoLearn_C2" src="https://github.com/user-attachments/assets/cb09edf4-b971-4c65-91e4-5c9b6cbd6adc" />
+
+### Component Diagram (C3)
+
+<img width="1272" height="2070" alt="GeoLearn_C3" src="https://github.com/user-attachments/assets/e90c0a9e-3e59-419f-a619-4265e36a138a" />
+
+### Code Diagram (C4)
+
+<img width="1664" height="1830" alt="GeoLearn_C4" src="https://github.com/user-attachments/assets/1c0e08e9-0cad-4892-b571-273aa1cf7f53" />
+
+## Application mockups
+
+Link to figma project with application mockups: https://www.figma.com/design/mrJtIXlqe4mt2kkalx0Wt4/Mobilki-Mobilki?node-id=0-1&t=uGbseaNRXFsdZu2B-1
+
+Prototype link: https://www.figma.com/proto/mrJtIXlqe4mt2kkalx0Wt4/Mobilki-Mobilki?node-id=0-1&t=uGbseaNRXFsdZu2B-1
 
 ## Get started
 
@@ -34,17 +58,3 @@ npm run reset-project
 ```
 
 This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
