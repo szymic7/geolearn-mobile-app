@@ -1,10 +1,10 @@
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 
-export default function CustomBtn({ type, onPress, title }) {
+export default function CustomBtn({ type, onPress, children }) {
   return (
     <TouchableHighlight onPress={onPress}>
       <View style={[styles.btn, styles[type]]}>
-        <Text style={[textStyles.text, textStyles[type]]}>{title}</Text>
+        <Text style={[textStyles.text, textStyles[type]]}>{children}</Text>
       </View>
     </TouchableHighlight>
   );
@@ -22,10 +22,10 @@ const styles = StyleSheet.create({
   },
 
 
-  login: {
+  gray: {
     backgroundColor: "#D9D9D9",
   },
-  register: {
+  green: {
     backgroundColor: "#3ABB51",
     color: "#fff"
   }
@@ -37,8 +37,10 @@ const textStyles = StyleSheet.create({
     fontFamily: "Montserrat",
     fontSize: 16,
   },
-  register: {
+  green: {
     color: "#fff",
-    fontWeight: 700
+  },
+  gray: {
+    color: "#000",
   }
 })

@@ -19,8 +19,8 @@ export default function Landing() {
       </View>
       <View style={styles.actions}>
         <Text style={styles.actionsText}>Lets get started</Text>
-        <CustomBtn title="Login" type="login" onPress={() => navigation.navigate('login')}></CustomBtn>
-        <CustomBtn title="Register" onPress="" type="register"></CustomBtn>
+        <CustomBtn type="gray" onPress={() => navigation.navigate('login')}>Login</CustomBtn>
+        <CustomBtn type="green" onPress="" >Register</CustomBtn>
       </View>
     </View>
   );
