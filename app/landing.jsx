@@ -3,8 +3,7 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import CustomBtn from "../components/ui/CustomBtn";
 
 export default function Landing() {
-
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -19,8 +18,12 @@ export default function Landing() {
       </View>
       <View style={styles.actions}>
         <Text style={styles.actionsText}>Lets get started</Text>
-        <CustomBtn type="gray" onPress={() => navigation.navigate('login')}>Login</CustomBtn>
-        <CustomBtn type="green" onPress="" >Register</CustomBtn>
+        <CustomBtn type="gray" onPress={() => navigation.navigate("login")}>
+          Login
+        </CustomBtn>
+        <CustomBtn type="green" onPress={() => navigation.navigate("register")}>
+          Register
+        </CustomBtn>
       </View>
     </View>
   );
@@ -53,7 +56,6 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat",
     fontWeight: 700,
     fontSize: 14,
-
   },
   actions: {
     flex: 2,
@@ -66,12 +68,12 @@ const styles = StyleSheet.create({
     paddingBottom: 56,
     gap: 20,
     alignItems: "center",
-    boxShadow: "0px -7px 4px 0 rgb(0, 0, 0, 0.15)"
+    boxShadow: "0px -7px 4px 0 rgb(0, 0, 0, 0.15)",
   },
   center: {
     flex: 1,
     // alignItems: "center",
     justifyContent: "center",
-    gap: 20
-  }
+    gap: 20,
+  },
 });
