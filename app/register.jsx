@@ -1,13 +1,11 @@
 import { useState } from "react";
 import {
   ImageBackground,
-  Keyboard,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import { TextInput } from "react-native-paper";
@@ -20,94 +18,91 @@ export default function Register() {
   const [repeatPassword, setRepeatPassword] = useState("");
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <ImageBackground
-        style={styles.img}
-        source={require("../assets/images/bg-login.png")}
-        resizeMode="cover"
+    <ImageBackground
+      style={styles.img}
+      source={require("../assets/images/bg-login.png")}
+      resizeMode="cover"
+    >
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={60}
+        style={styles.container}
       >
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          keyboardVerticalOffset={120}
-        >
-          <ScrollView
-            contentContainerStyle={styles.center}
-            // keyboardShouldPersistTaps="handled"
-          >
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <View style={styles.form}>
             <Text style={styles.header}>
               Join GeoLearn and start your journey
             </Text>
-            <View style={styles.form}>
-              <View style={styles.row}>
-                <Text style={styles.label}>Name</Text>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={(text) => setName(text)}
-                  value={name}
-                  placeholder="Mateusz"
-                  keyboardType="text"
-                  right={<TextInput.Icon icon="account" />}
-                  mode="outlined"
-                />
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Email</Text>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={(text) => setEmail(text)}
-                  value={email}
-                  placeholder="bleksy@gmail.com"
-                  keyboardType="email-address"
-                  right={<TextInput.Icon icon="email" />}
-                  mode="outlined"
-                />
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Password</Text>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={(text) => setPassword(text)}
-                  value={password}
-                  placeholder="Password"
-                  secureTextEntry={true}
-                  right={<TextInput.Icon icon="lock" />}
-                  mode="outlined"
-                />
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Repeat Password</Text>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={(text) => setRepeatPassword(text)}
-                  value={repeatPassword}
-                  placeholder="Password"
-                  secureTextEntry={true}
-                  right={<TextInput.Icon icon="lock" />}
-                  mode="outlined"
-                />
-              </View>
-              <CustomBtn type="green">Sign up</CustomBtn>
-              <Text>
-                Have already account?{" "}
-                <Text style={styles.underline}>Login</Text>
-              </Text>
+            <View style={styles.row}>
+              <Text style={styles.label}>Name</Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => setName(text)}
+                value={name}
+                placeholder="Mateusz"
+                keyboardType="text"
+                right={<TextInput.Icon icon="account" />}
+                mode="outlined"
+              />
             </View>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </ImageBackground>
-    </TouchableWithoutFeedback>
+            <View style={styles.row}>
+              <Text style={styles.label}>Email</Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => setEmail(text)}
+                value={email}
+                placeholder="bleksy@gmail.com"
+                keyboardType="email-address"
+                right={<TextInput.Icon icon="email" />}
+                mode="outlined"
+              />
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.label}>Password</Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => setPassword(text)}
+                value={password}
+                placeholder="Password"
+                secureTextEntry={true}
+                right={<TextInput.Icon icon="lock" />}
+                mode="outlined"
+              />
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.label}>Repeat Password</Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => setRepeatPassword(text)}
+                value={repeatPassword}
+                placeholder="Password"
+                secureTextEntry={true}
+                right={<TextInput.Icon icon="lock" />}
+                mode="outlined"
+              />
+            </View>
+            <CustomBtn type="green">Sign up</CustomBtn>
+            <Text>
+              Have already account? <Text style={styles.underline}>Login</Text>
+            </Text>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  center: {
+  container: {
     flex: 1,
-    alignItems: "center",
+  },
+  scrollContainer: {
+    flexGrow: 1,
     justifyContent: "center",
-    flexDirection: "column",
-    gap: 12,
+    alignItems: "center",
     padding: 24,
   },
+
   img: {
     width: "100%",
     height: "100%",
