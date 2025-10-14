@@ -1,3 +1,4 @@
+import { Link } from "@react-navigation/native";
 import { useState } from "react";
 import {
   ImageBackground,
@@ -16,6 +17,28 @@ import Colors from "../utils/colors";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
+
+  function validate() {
+    const newErrors = {};
+
+    if (!email.trim()) newErrors.email = "Email is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+      newErrors.email = "Invalid email format";
+
+    if (!password.trim()) newErrors.password = "Password is required";
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  }
+
+  function handleSubmit() {
+    const ok = validate();
+    if (ok) {
+      alert("Logged in successfully");
+    }
+  }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -36,32 +59,49 @@ export default function Login() {
                 <Text style={styles.label}>Email</Text>
                 <TextInput
                   style={styles.input}
-                  onChangeText={(text) => setEmail(text)}
+                  onChangeText={(text) => {
+                    setEmail(text);
+                    if (errors.email)
+                      setErrors((e) => ({ ...e, email: undefined }));
+                  }}
                   value={email}
                   placeholder="Email"
                   keyboardType="email-address"
                   right={<TextInput.Icon icon="email" />}
                   mode="outlined"
                 />
+                {errors.email && (
+                  <Text style={styles.error}>{errors.email}</Text>
+                )}
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Password</Text>
                 <TextInput
                   style={styles.input}
-                  onChangeText={(text) => setPassword(text)}
+                  onChangeText={(text) => {
+                    setPassword(text);
+                    if (errors.password)
+                      setErrors((e) => ({ ...e, password: undefined }));
+                  }}
                   value={password}
                   placeholder="Password"
                   secureTextEntry={true}
                   right={<TextInput.Icon icon="lock" />}
                   mode="outlined"
                 />
-                <Text style={[styles.alignRight, styles.underline]}>
-                  Forgot password
-                </Text>
+
+                {errors.password && (
+                  <Text style={styles.error}>{errors.password}</Text>
+                )}
               </View>
-              <CustomBtn type="green">Login</CustomBtn>
+              <CustomBtn type="green" onPress={handleSubmit}>
+                Login
+              </CustomBtn>
               <Text>
-                New in GeoLearn? <Text style={styles.underline}>Sign up </Text>
+                New in GeoLearn?{" "}
+                <Link screen="register" style={styles.link}>
+                  Sign up{" "}
+                </Link>
               </Text>
             </View>
           </View>
@@ -113,7 +153,13 @@ const styles = StyleSheet.create({
   alignRight: {
     textAlign: "right",
   },
-  underline: {
+  link: {
     textDecorationLine: "underline",
+    color: Colors.textPrimary,
+  },
+  error: {
+    color: Colors.error,
+    fontSize: 12,
+    marginTop: 4,
   },
 });
