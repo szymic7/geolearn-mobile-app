@@ -1,6 +1,7 @@
 import { useNavigation } from "expo-router";
 import { Image, StyleSheet, Text, View } from "react-native";
 import CustomBtn from "../components/ui/CustomBtn";
+import Colors from "../utils/colors";
 
 export default function Landing() {
   const navigation = useNavigation();
@@ -31,7 +32,7 @@ export default function Landing() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#3ABB51",
+    backgroundColor: Colors.primary,
     flex: 1,
   },
   logoBox: {
@@ -46,13 +47,13 @@ const styles = StyleSheet.create({
     height: 84,
   },
   logoText: {
-    color: "#fff",
+    color: Colors.textInverse,
     fontFamily: "Montserrat",
     fontWeight: "400",
     fontSize: 13,
   },
   actionsText: {
-    color: "#000",
+    color: Colors.textPrimary,
     fontFamily: "Montserrat",
     fontWeight: 700,
     fontSize: 14,

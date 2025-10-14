@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { TextInput } from "react-native-paper";
 import CustomBtn from "../components/ui/CustomBtn";
+import Colors from "../utils/colors";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -79,15 +80,15 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   header: {
-    color: "#000",
+    color: Colors.textPrimary,
     fontSize: 32,
     textAlign: "center",
   },
   input: {
     width: 280,
     height: 50,
-    borderColor: "#aaa",
-    backgroundColor: "#fff",
+    borderColor: Colors.border,
+    backgroundColor: Colors.background,
     borderRadius: 11,
     maxLength: 80,
   },
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
     gap: 24,
   },
   label: {
-    color: "#000",
+    color: Colors.textPrimary,
     fontSize: 18,
     fontWeight: 500,
     marginLeft: -10,
