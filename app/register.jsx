@@ -1,3 +1,4 @@
+import { Link } from "@react-navigation/native";
 import { useState } from "react";
 import {
   ImageBackground,
@@ -16,6 +17,34 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [errors, setErrors] = useState({});
+
+  function validate() {
+    const newErrors = {};
+    if (!name.trim()) newErrors.name = "Name is required";
+    else if (!/^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/.test(name))
+      newErrors.name = "Only letters and spaces allowed";
+
+    if (!email.trim()) newErrors.email = "Email is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+      newErrors.email = "Invalid email format";
+
+    if (!password.trim()) newErrors.password = "Password is required";
+    else if (password !== repeatPassword)
+      newErrors.password = "Passwords do not match";
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  }
+
+  function handleSubmit() {
+    const ok = validate();
+    if (ok) {
+      alert("Account created successfully");
+      //TODO: Implement registration logic
+    }
+  }
 
   return (
     <ImageBackground
@@ -28,7 +57,10 @@ export default function Register() {
         keyboardVerticalOffset={60}
         style={styles.container}
       >
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <ScrollView
+          contentContainerStyle={styles.scrollContainer}
+          keyboardShouldPersistTaps="handled"
+        >
           <View style={styles.form}>
             <Text style={styles.header}>
               Join GeoLearn and start your journey
@@ -37,37 +69,54 @@ export default function Register() {
               <Text style={styles.label}>Name</Text>
               <TextInput
                 style={styles.input}
-                onChangeText={(text) => setName(text)}
+                onChangeText={(text) => {
+                  setName(text);
+                  if (errors.name)
+                    setErrors((e) => ({ ...e, name: undefined }));
+                }}
                 value={name}
                 placeholder="Mateusz"
                 keyboardType="text"
                 right={<TextInput.Icon icon="account" />}
                 mode="outlined"
               />
+              {errors.name && <Text style={styles.error}>{errors.name}</Text>}
             </View>
             <View style={styles.row}>
               <Text style={styles.label}>Email</Text>
               <TextInput
                 style={styles.input}
-                onChangeText={(text) => setEmail(text)}
+                onChangeText={(text) => {
+                  setEmail(text);
+                  if (errors.email)
+                    setErrors((e) => ({ ...e, email: undefined }));
+                }}
                 value={email}
                 placeholder="bleksy@gmail.com"
                 keyboardType="email-address"
                 right={<TextInput.Icon icon="email" />}
                 mode="outlined"
               />
+              {errors.email && <Text style={styles.error}>{errors.email}</Text>}
             </View>
             <View style={styles.row}>
               <Text style={styles.label}>Password</Text>
               <TextInput
                 style={styles.input}
-                onChangeText={(text) => setPassword(text)}
+                onChangeText={(text) => {
+                  setPassword(text);
+                  if (errors.password)
+                    setErrors((e) => ({ ...e, password: undefined }));
+                }}
                 value={password}
                 placeholder="Password"
                 secureTextEntry={true}
                 right={<TextInput.Icon icon="lock" />}
                 mode="outlined"
               />
+              {errors.password && (
+                <Text style={styles.error}>{errors.password}</Text>
+              )}
             </View>
             <View style={styles.row}>
               <Text style={styles.label}>Repeat Password</Text>
@@ -81,9 +130,14 @@ export default function Register() {
                 mode="outlined"
               />
             </View>
-            <CustomBtn type="green">Sign up</CustomBtn>
+            <CustomBtn type="green" onPress={handleSubmit}>
+              Sign up
+            </CustomBtn>
             <Text>
-              Have already account? <Text style={styles.underline}>Login</Text>
+              Have already account?{" "}
+              <Link screen="login" style={styles.link}>
+                Login
+              </Link>
             </Text>
           </View>
         </ScrollView>
@@ -102,7 +156,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 24,
   },
-
   img: {
     width: "100%",
     height: "100%",
@@ -135,7 +188,13 @@ const styles = StyleSheet.create({
   alignRight: {
     textAlign: "right",
   },
-  underline: {
+  link: {
+    color: "#000",
     textDecorationLine: "underline",
+  },
+  error: {
+    color: "red",
+    fontSize: 12,
+    marginTop: 4,
   },
 });
