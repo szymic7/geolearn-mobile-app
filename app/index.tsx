@@ -14,7 +14,7 @@ export default function Index() {
       <Link href="/landing">Click here to see auth landing page</Link>
       <Link href="/login">Click here to see login page</Link>
       <Link href="/register">Click here to see register page</Link>
-      <Link href="/home">Click here to see home page</Link>
+      <Link href="/home">Home</Link>
     </View>
   );
 }

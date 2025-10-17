@@ -7,7 +7,7 @@ const Colors = {
 
   background: "#fff",
 
-  textPrimary: "#000",
+  textPrimary: "#1D1B20",
   textSecondary: "",
   textInverse: "#fff",
 
