@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, ScrollView, Text } from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import BurgerMenuButton from '../components/ui/BurgerMenuButton';
 import Header from '../components/ui/Header';
 import TileButton from '../components/ui/TileButton';

@@ -14,6 +14,8 @@ const Colors = {
   error: "#A61515",
 
   border: "#aaa",
+
+  shadowColor: "#000",
 };
 
 export default Colors;

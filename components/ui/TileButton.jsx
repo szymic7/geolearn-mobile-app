@@ -28,13 +28,13 @@ const styles = StyleSheet.create({
     shadowWrapper: {
         width: '100%',
         height: '22.5%',
-        shadowColor: '#000',
+        shadowColor: Colors.shadowColor,
         shadowOpacity: 0.27,
         shadowOffset: { width: 0.5, height: 3 },
         shadowRadius: 3,
         elevation: 6,
         borderRadius: 17,
-        backgroundColor: '#fff', // iOS needs a solid background for shadow
+        backgroundColor: Colors.background, // iOS needs a solid background for shadow
     },
 
     container: {
