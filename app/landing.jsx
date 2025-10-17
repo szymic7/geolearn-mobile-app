@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   actions: {
-    flex: 2,
-    backgroundColor: "#fff",
+    flex: 1,
+    backgroundColor: Colors.background,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     paddingLeft: 56,
@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
   },
   center: {
     flex: 1,
-    // alignItems: "center",
     justifyContent: "center",
     gap: 20,
   },
