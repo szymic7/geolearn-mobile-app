@@ -1,8 +1,7 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Colors from '../../utils/colors';
+import { getProgressColor } from "../../utils/getProgressColor";
 import QuizProgressBar from './QuizProgressBar';
-import {getProgressColor} from "../../utils/progress";
 
 export default function TileLabel({ title, showProgress, progress})
 {

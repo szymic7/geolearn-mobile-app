@@ -1,9 +1,8 @@
-import React from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import BurgerMenuButton from '../components/ui/BurgerMenuButton';
+import ContinentsTileButton from "../components/ui/ContinentsTileButton";
 import Header from '../components/ui/Header';
 import Colors from "../utils/colors";
-import ContinentsTileButton from "../components/ui/ContinentsTileButton";
 
 export default function ContinentsChoiceQuiz() {
     return <View style={styles.container}>
@@ -13,7 +12,7 @@ export default function ContinentsChoiceQuiz() {
         </View>
 
         <ScrollView contentContainerStyle={styles.mainContent}>
-            <Header title="Which flags do you want to learn?" />
+            <Header title="Select region" />
 
             <View style={styles.tilesContainer}>
                 <ContinentsTileButton

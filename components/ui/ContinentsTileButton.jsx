@@ -1,8 +1,7 @@
-import React from 'react';
-import {TouchableOpacity, View, StyleSheet, ImageBackground, Text} from 'react-native';
+import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Colors from "../../utils/colors";
+import { getProgressColor } from "../../utils/getProgressColor";
 import QuizProgressBar from "./QuizProgressBar";
-import {getProgressColor} from "../../utils/progress";
 
 
 export default function ContinentsTileButton({ title, imageSource, showProgress = false, progress = 0, onPress })
@@ -70,6 +69,7 @@ const styles = StyleSheet.create({
     },
 
     text:{
+        width: "100%",
         alignSelf: 'center',
         justifySelf: 'center',
         paddingVertical: 6,
