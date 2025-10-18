@@ -16,6 +16,8 @@ export default function Index() {
       <Link href="/register">Click here to see register page</Link>
       <Link href="/home">Home</Link>
       <Link href="/quizChoice">Quiz</Link>
+      <Link href="/continentsChoice">Continents Choice</Link>
+      <Link href="/ccQuiz">Continents Choice Quiz</Link>
     </View>
   );
 }

@@ -19,6 +19,8 @@ export default function RootLayout() {
       <Stack.Screen name="register" />
       <Stack.Screen name="home" />
       <Stack.Screen name="quizChoice" />
+      <Stack.Screen name="continentsChoice" />
+      <Stack.Screen name="ccQuiz" />
     </Stack>
   );
 }

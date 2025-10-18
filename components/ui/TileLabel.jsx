@@ -2,27 +2,12 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Colors from '../../utils/colors';
 import QuizProgressBar from './QuizProgressBar';
+import {getProgressColor} from "../../utils/progress";
 
 export default function TileLabel({ title, showProgress, progress})
 {
     const percentage = Math.round(progress * 100);
-
-    let percentColor;
-    if (progress < 0.5) {
-        // from red → yellow
-        const ratio = progress / 0.5;
-        const r = 255;
-        const g = Math.round(255 * ratio);
-        const b = 0;
-        percentColor = `rgb(${r}, ${g}, ${b})`;
-    } else {
-        // from yellow → green
-        const ratio = (progress - 0.5) / 0.5;
-        const r = Math.round(255 * (1 - ratio));
-        const g = 255;
-        const b = 0;
-        percentColor = `rgb(${r}, ${g}, ${b})`;
-    }
+    const percentColor = getProgressColor(progress);
 
     return (
         <View style={styles.container}>

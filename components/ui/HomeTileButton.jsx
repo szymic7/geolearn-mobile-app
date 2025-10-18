@@ -4,12 +4,12 @@ import Colors from "../../utils/colors";
 import TileLabel from "./TileLabel";
 
 
-export default function TileButton({ title, imageSource, showProgress = false, progress = 0, onPress })
+export default function HomeTileButton({ title, imageSource, showProgress = false, progress = 0, onPress })
 {
     return (
         <View style={styles.shadowWrapper}>
 
-            <TouchableOpacity style={styles.container} onPress={onPress}>
+            <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.85}>
                 {imageSource && <Image
                     source={imageSource}
                     style={[styles.image, { transform: [{ translateY: '10.5%' }] }]}

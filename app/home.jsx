@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import BurgerMenuButton from '../components/ui/BurgerMenuButton';
 import Header from '../components/ui/Header';
-import TileButton from '../components/ui/TileButton';
+import HomeTileButton from '../components/ui/HomeTileButton';
 import Colors from "../utils/colors";
 
 export default function Home() {
@@ -16,19 +16,19 @@ export default function Home() {
             <Header title="What do you feel like learning today?" />
 
             <View style={styles.tilesContainer}>
-                <TileButton
+                <HomeTileButton
                     title="Flags"
                     imageSource={require('../assets/images/img_flags.png')}
                 />
-                <TileButton
+                <HomeTileButton
                     title="Maps"
                     imageSource={require('../assets/images/img_maps.png')}
                 />
-                <TileButton
+                <HomeTileButton
                     title="Capitals"
                     imageSource={require('../assets/images/img_capitals.png')}
                 />
-                <TileButton
+                <HomeTileButton
                     title="Try yourself in quizzes"
                     imageSource={require('../assets/images/img_quizzes.png')}
                 />

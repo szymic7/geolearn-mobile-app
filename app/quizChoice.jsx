@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import BurgerMenuButton from '../components/ui/BurgerMenuButton';
 import Header from '../components/ui/Header';
-import TileButton from '../components/ui/TileButton';
+import HomeTileButton from '../components/ui/HomeTileButton';
 import Colors from "../utils/colors";
 
 export default function QuizChoice() {
@@ -16,25 +16,25 @@ export default function QuizChoice() {
             <Header title="Choose your quiz category" />
 
             <View style={styles.tilesContainer}>
-                <TileButton
+                <HomeTileButton
                     title="Flags"
                     imageSource={require('../assets/images/img_flags.png')}
                     showProgress={true}
                     progress={0.3}
                 />
-                <TileButton
+                <HomeTileButton
                     title="Maps"
                     imageSource={require('../assets/images/img_maps.png')}
                     showProgress={true}
                     progress={0.6}
                 />
-                <TileButton
+                <HomeTileButton
                     title="Capitals"
                     imageSource={require('../assets/images/img_capitals.png')}
                     showProgress={true}
                     progress={1}
                 />
-                <TileButton
+                <HomeTileButton
                     title="Mixed"
                     imageSource={require('../assets/images/img_mixed.png')}
                     showProgress={true}
