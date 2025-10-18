@@ -1,9 +1,10 @@
 import React from 'react';
-import { TouchableOpacity, View, Text, StyleSheet, Image } from 'react-native';
+import { TouchableOpacity, View, StyleSheet, Image } from 'react-native';
 import Colors from "../../utils/colors";
+import TileLabel from "./TileLabel";
 
 
-export default function TileButton({ title, imageSource, onPress })
+export default function TileButton({ title, imageSource, showProgress = false, progress = 0, onPress })
 {
     return (
         <View style={styles.shadowWrapper}>
@@ -14,8 +15,8 @@ export default function TileButton({ title, imageSource, onPress })
                     style={[styles.image, { transform: [{ translateY: '10.5%' }] }]}
                     resizeMode="cover"/>
                 }
-                <View style={styles.textContainer}>
-                    <Text style={styles.text}>{title}</Text>
+                <View>
+                    <TileLabel title={title} showProgress={showProgress} progress={progress} />
                 </View>
             </TouchableOpacity>
 
@@ -49,19 +50,4 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
     },
-
-    textContainer: {
-        backgroundColor: 'white',
-        padding: 5,
-    },
-
-    text: {
-        fontSize: 16,
-        fontFamily: 'Montserrat',
-        letterSpacing: 0.1,
-        fontWeight: '500',
-        textAlign: 'center',
-        color: Colors.textPrimary,
-    },
-
 });

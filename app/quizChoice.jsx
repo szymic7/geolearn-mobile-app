@@ -5,7 +5,7 @@ import Header from '../components/ui/Header';
 import TileButton from '../components/ui/TileButton';
 import Colors from "../utils/colors";
 
-export default function Home() {
+export default function QuizChoice() {
     return <View style={styles.container}>
 
         <View style={styles.burgerArea}>
@@ -13,24 +13,32 @@ export default function Home() {
         </View>
 
         <ScrollView contentContainerStyle={styles.mainContent}>
-            <Header title="What do you feel like learning today?" />
+            <Header title="Choose your quiz category" />
 
             <View style={styles.tilesContainer}>
                 <TileButton
                     title="Flags"
                     imageSource={require('../assets/images/img_flags.png')}
+                    showProgress={true}
+                    progress={0.3}
                 />
                 <TileButton
                     title="Maps"
                     imageSource={require('../assets/images/img_maps.png')}
+                    showProgress={true}
+                    progress={0.6}
                 />
                 <TileButton
                     title="Capitals"
                     imageSource={require('../assets/images/img_capitals.png')}
+                    showProgress={true}
+                    progress={1}
                 />
                 <TileButton
-                    title="Try yourself in quizzes"
-                    imageSource={require('../assets/images/img_quizzes.png')}
+                    title="Mixed"
+                    imageSource={require('../assets/images/img_mixed.png')}
+                    showProgress={true}
+                    progress={0.7}
                 />
             </View>
         </ScrollView>
