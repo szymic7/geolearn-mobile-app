@@ -7,13 +7,15 @@ const Colors = {
 
   background: "#fff",
 
-  textPrimary: "#000",
+  textPrimary: "#1D1B20",
   textSecondary: "",
   textInverse: "#fff",
 
   error: "#A61515",
 
   border: "#aaa",
+
+  shadowColor: "#000",
 };
 
 export default Colors;
