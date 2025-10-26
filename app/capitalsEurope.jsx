@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, StyleSheet, Text, View } from 'react-native';
 import BurgerMenuButton from '../components/ui/BurgerMenuButton';
-import FlagsViewer from '../components/ui/FlagsViewer';
+import CapitalsViewer from '../components/ui/CapitalsViewer';
 import Colors from "../utils/colors";
 
-export default function FlagsWorld() {
+export default function CapitalsEurope() {
     const [countries, setCountries] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchCountries = async () => {
         try {
-            const response = await fetch("http://localhost:8000/countries");
+            const response = await fetch("http://localhost:8000/countries/capitals/europe");
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -22,7 +22,7 @@ export default function FlagsWorld() {
             setCountries(sortedData);
         } catch (error) {
             console.error('Failed to fetch countries:', error);
-            Alert.alert('Error', 'Failed to load flags. Please try again later.');
+            Alert.alert('Error', 'Failed to load data. Please try again later.');
         } finally {
             setLoading(false);
         }
@@ -38,8 +38,8 @@ export default function FlagsWorld() {
                     <BurgerMenuButton/>
                 </View>
 
-                <View style={styles.flagsViewer}>
-                    <FlagsViewer countries={countries}/>
+                <View style={styles.capitalsViewer}>
+                    <CapitalsViewer countries={countries} />
                 </View>
             </View>
         ) : (
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         zIndex: 10,
     },
 
-    flagsViewer: {
+    capitalsViewer: {
         marginTop: 80,  // starts below BurgerMenuButton
         height: '70%',
         width: '80%',

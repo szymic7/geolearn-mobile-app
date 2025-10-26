@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, StyleSheet, Text, View } from 'react-native';
 import BurgerMenuButton from '../components/ui/BurgerMenuButton';
-import FlagsViewer from '../components/ui/flagsViewer';
+import FlagsViewer from '../components/ui/FlagsViewer';
 import Colors from "../utils/colors";
 
 export default function FlagsAustralia() {

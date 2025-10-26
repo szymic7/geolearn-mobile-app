@@ -3,7 +3,7 @@ import { Animated, StyleSheet, Text, TouchableOpacity, View } from 'react-native
 import Colors from '../../utils/colors';
 
 export default function FlagsViewer({ countries }) {
-    const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0);
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
   const nextFlag = () => {
@@ -46,7 +46,7 @@ export default function FlagsViewer({ countries }) {
 
   const country = countries[index];
   const iso2 = country.iso_a2.toLowerCase();
-  const flagUrl = `https://flagcdn.com/w160/${iso2}.png`;
+  const flagUrl = `https://flagcdn.com/w160/${iso2}.png`;  // Need to check if w320 image will fit
 
     return (
         <View style={styles.container}>
@@ -82,69 +82,69 @@ export default function FlagsViewer({ countries }) {
 const styles = StyleSheet.create({
 
     container: {
-        flex: 1,
-        backgroundColor: Colors.contrasting,
-        alignItems: 'center',
-        width: "100%",
-        height: "100%",
-        borderRadius: 10,
-        padding: 20
+      flex: 1,
+      backgroundColor: Colors.contrasting,
+      alignItems: 'center',
+      width: "100%",
+      height: "100%",
+      borderRadius: 10,
+      padding: 20
     },
 
     countryName: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 15,
-        color: Colors.secondary,
-        textShadowColor: 'rgba(0, 0, 0, 0.3)',
-        textShadowOffset: { width: 2, height: 2 },
-        textShadowRadius: 3,
+      fontSize: 24,
+      fontWeight: 'bold',
+      marginBottom: 15,
+      color: Colors.secondary,
+      textShadowColor: 'rgba(0, 0, 0, 0.3)',
+      textShadowOffset: { width: 2, height: 2 },
+      textShadowRadius: 3,
     },
 
     imageWithArrows: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: 10
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginBottom: 15
     },
 
     imageContainer: {
-        width: 160,
-        height: 120
+      width: 160,
+      height: 120
     },
 
     flagImage: {
-        flex: 1,
-        width: undefined,
-        height: undefined,
-        resizeMode: 'contain',
-        // shadow - iOS
-        shadowColor: '#000',
-        shadowOffset: { width: 2, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 4,
-        // shadow - Android
-        elevation: 5,
+      flex: 1,
+      width: undefined,
+      height: undefined,
+      resizeMode: 'contain',
+      // shadow - iOS
+      shadowColor: '#000',
+      shadowOffset: { width: 2, height: 2 },
+      shadowOpacity: 0.3,
+      shadowRadius: 4,
+      // shadow - Android
+      elevation: 5,
     },
 
     prevNextButton: {
-        paddingHorizontal: 15,
+      paddingHorizontal: 15,
     },
 
     prevNextButtonText: {
-        fontSize: 32,
-        color: Colors.secondary,
-        textShadowColor: 'rgba(0, 0, 0, 0.3)',
-        textShadowOffset: { width: 2, height: 2 },
-        textShadowRadius: 3,
+      fontSize: 32,
+      color: Colors.secondary,
+      textShadowColor: 'rgba(0, 0, 0, 0.3)',
+      textShadowOffset: { width: 2, height: 2 },
+      textShadowRadius: 3,
     },
 
     indexCounter: {
-        fontSize: 16,
-        color: Colors.secondary,
+      fontSize: 16,
+      color: Colors.secondary,
     },
 
     infoText: {
-        color: '#888',
+      color: Colors.secondary,
     },
 });
