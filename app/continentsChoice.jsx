@@ -13,7 +13,7 @@ export default function ContinentsChoice() {
         </View>
 
         <ScrollView contentContainerStyle={styles.mainContent}>
-            <Header title="Which flags do you want to learn?" />
+            <Header style={styles.head} title="Which flags do you want to learn?" />
 
             <View style={styles.tilesContainer}>
                 <ContinentsTileButton
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
 
     mainContent: {
         flex: 1,
-        width: '71%',
+        width: 280,
         height: '100%',
         justifyContent: 'space-between',
         paddingTop: '4%',
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
     },
 
     tilesContainer: {
+        width: '100%',
         flexDirection: 'column',
         justifyContent: 'space-around',
         flexGrow: 1,

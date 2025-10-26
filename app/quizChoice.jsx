@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
 
     mainContent: {
         flex: 1,
-        width: '71%',
+        width: 280,
         height: '100%',
         justifyContent: 'space-between',
         paddingTop: '4%',

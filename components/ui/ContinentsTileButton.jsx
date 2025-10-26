@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
     },
 
     text:{
-        width: "100%",
         alignSelf: 'center',
         justifySelf: 'center',
         paddingVertical: 6,
