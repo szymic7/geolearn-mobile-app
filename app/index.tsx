@@ -15,9 +15,10 @@ export default function Index() {
       <Link href="/login">Click here to see login page</Link>
       <Link href="/register">Click here to see register page</Link>
       <Link href="/home">Home</Link>
-      <Link href="/quizChoice">Quiz</Link>
+      <Link href="/quizChoice">Quiz Choice</Link>
       <Link href="/continentsChoice">Continents Choice</Link>
       <Link href="/continentsChoiceQuiz">Continents Choice Quiz</Link>
+      <Link href="/quiz">Quiz</Link>
     </View>
   );
 }

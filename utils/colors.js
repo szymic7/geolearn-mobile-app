@@ -16,6 +16,10 @@ const Colors = {
   border: "#aaa",
 
   shadowColor: "#000",
+
+  correctAnswer: "#3ABB51",
+  wrongAnswer: "#f03e3e",
+
 };
 
 export default Colors;
