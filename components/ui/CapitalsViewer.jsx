@@ -153,8 +153,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: Colors.secondary,
     marginRight: 10,
-    textAlign: 'center',      // ✅ center multiline text
-    flexShrink: 1,            // ✅ allow text to shrink when needed
+    textAlign: 'center',
+    flexShrink: 1,
     textShadowColor: 'rgba(0, 0, 0, 0.3)',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 3,
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
   },
 
   prevNextButtonText: {
-    fontSize: 32,
+    fontSize: 40,
     color: Colors.secondary,
     textShadowColor: 'rgba(0,0,0,0.3)',
     textShadowOffset: { width: 2, height: 2 },

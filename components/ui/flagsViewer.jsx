@@ -84,17 +84,24 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: Colors.contrasting,
+      justifyContent: 'center',
       alignItems: 'center',
       width: "100%",
       height: "100%",
       borderRadius: 10,
-      padding: 20
+      padding: 10,
+      shadowColor: '#000',
+      shadowOffset: { width: 2, height: 2 },
+      shadowOpacity: 0.3,
+      shadowRadius: 4,
     },
 
     countryName: {
-      fontSize: 24,
+      fontSize: 28,
       fontWeight: 'bold',
-      marginBottom: 15,
+      textAlign: 'center',
+      flexShrink: 1,
+      marginBottom: 20,
       color: Colors.secondary,
       textShadowColor: 'rgba(0, 0, 0, 0.3)',
       textShadowOffset: { width: 2, height: 2 },
@@ -110,7 +117,8 @@ const styles = StyleSheet.create({
 
     imageContainer: {
       width: 160,
-      height: 120
+      height: 120,
+      justifyContent: 'center',
     },
 
     flagImage: {
@@ -118,21 +126,22 @@ const styles = StyleSheet.create({
       width: undefined,
       height: undefined,
       resizeMode: 'contain',
+      padding: 3,
       // shadow - iOS
       shadowColor: '#000',
       shadowOffset: { width: 2, height: 2 },
       shadowOpacity: 0.3,
-      shadowRadius: 4,
+      shadowRadius: 3,
       // shadow - Android
-      elevation: 5,
+      elevation: 3,
     },
 
     prevNextButton: {
-      paddingHorizontal: 15,
+      paddingHorizontal: 20,
     },
 
     prevNextButtonText: {
-      fontSize: 32,
+      fontSize: 48,
       color: Colors.secondary,
       textShadowColor: 'rgba(0, 0, 0, 0.3)',
       textShadowOffset: { width: 2, height: 2 },

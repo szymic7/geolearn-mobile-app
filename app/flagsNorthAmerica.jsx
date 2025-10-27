@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
     },
 
     flagsViewer: {
-        marginTop: 80,  // starts below BurgerMenuButton
-        height: '70%',
+        marginTop: 120,
+        height: '60%',
         width: '80%',
         justifyContent: 'center',
         alignItems: 'center',
