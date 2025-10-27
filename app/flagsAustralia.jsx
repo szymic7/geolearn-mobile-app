@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, StyleSheet, Text, View } from 'react-native';
 import BurgerMenuButton from '../components/ui/BurgerMenuButton';
 import FlagsViewer from '../components/ui/FlagsViewer';
+import { FLAGS_ENDPOINTS } from '../constants/api';
 import Colors from "../utils/colors";
 
 export default function FlagsAustralia() {
@@ -11,7 +12,7 @@ export default function FlagsAustralia() {
     useEffect(() => {
         const fetchCountries = async () => {
         try {
-            const response = await fetch("http://localhost:8000/countries/australia");
+            const response = await fetch(FLAGS_ENDPOINTS.AUSTRALIAN_FLAGS);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, StyleSheet, Text, View } from 'react-native';
 import BurgerMenuButton from '../components/ui/BurgerMenuButton';
 import CapitalsViewer from '../components/ui/CapitalsViewer';
+import { CAPITALS_ENDPOINTS } from '../constants/api';
 import Colors from "../utils/colors";
 
 export default function CapitalsWorld() {
@@ -11,7 +12,7 @@ export default function CapitalsWorld() {
     useEffect(() => {
         const fetchCountries = async () => {
         try {
-            const response = await fetch("http://localhost:8000/countries/capitals");
+            const response = await fetch(CAPITALS_ENDPOINTS.ALL_CAPITALS);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -67,8 +68,8 @@ const styles = StyleSheet.create({
     },
 
     capitalsViewer: {
-        marginTop: 80,  // starts below BurgerMenuButton
-        height: '70%',
+        marginTop: 100,  // starts below BurgerMenuButton
+        height: '60%',
         width: '80%',
         justifyContent: 'center',
         alignItems: 'center',

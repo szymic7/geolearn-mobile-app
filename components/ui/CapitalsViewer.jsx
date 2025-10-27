@@ -24,16 +24,24 @@ export default function CapitalsViewer({ countries }) {
       const wikiData = await wikiRes.json();
       const page = Object.values(wikiData.query.pages)[0];
 
+      let imageSrc = null;
+
       if (page?.thumbnail?.source) {
-        setCapitalImage(page.thumbnail.source);
+        imageSrc = page.thumbnail.source;
       } else {
         const summaryUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(
           capital
         )}`;
         const summaryRes = await fetch(summaryUrl);
         const summaryData = await summaryRes.json();
-        setCapitalImage(summaryData?.thumbnail?.source || null);
+        imageSrc = summaryData?.thumbnail?.source || null;
+        // setCapitalImage(summaryData?.thumbnail?.source || null);
       }
+
+      setCapitalImage(imageSrc);
+
+      // 👇 Fade in only after we have the new image
+      Animated.timing(fadeAnim, { toValue: 1, duration: 300, useNativeDriver: true }).start();
     } catch (error) {
       console.error('Error fetching image for capital:', error);
       setCapitalImage(null);
@@ -43,20 +51,19 @@ export default function CapitalsViewer({ countries }) {
   };
 
   useEffect(() => {
+    fadeAnim.setValue(0); // reset opacity for new image
     fetchCapitalImage(country.capital);
   }, [index, country.capital]);
 
   const nextCapital = () => {
     Animated.timing(fadeAnim, { toValue: 0, duration: 200, useNativeDriver: true }).start(() => {
       setIndex((prev) => (prev + 1) % countries.length);
-      Animated.timing(fadeAnim, { toValue: 1, duration: 200, useNativeDriver: true }).start();
     });
   };
 
   const prevCapital = () => {
     Animated.timing(fadeAnim, { toValue: 0, duration: 200, useNativeDriver: true }).start(() => {
       setIndex((prev) => (prev - 1 + countries.length) % countries.length);
-      Animated.timing(fadeAnim, { toValue: 1, duration: 200, useNativeDriver: true }).start();
     });
   };
 
@@ -122,16 +129,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.contrasting,
+    justifyContent: 'center',
     alignItems: 'center',
     width: "100%",
     height: "100%",
     borderRadius: 10,
-    padding: 20
+    padding: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
   },
 
   countryHeader: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: 20,
   },
 
@@ -140,6 +153,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: Colors.secondary,
     marginRight: 10,
+    textAlign: 'center',      // ✅ center multiline text
+    flexShrink: 1,            // ✅ allow text to shrink when needed
     textShadowColor: 'rgba(0, 0, 0, 0.3)',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 3,
@@ -155,14 +170,18 @@ const styles = StyleSheet.create({
     width: undefined,
     height: undefined,
     resizeMode: 'contain',
-    borderRadius: 4,
+    padding: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
   },
 
   capitalName: {
     fontSize: 32,
     fontWeight: 'bold',
     color: Colors.secondary,
-    marginBottom: 15,
+    marginBottom: 10,
     textAlign: 'center',
     textShadowColor: 'rgba(0, 0, 0, 0.3)',
     textShadowOffset: { width: 2, height: 2 },
@@ -173,7 +192,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 15,
+    marginBottom: 10,
   },
 
   prevNextButton: {
@@ -189,8 +208,9 @@ const styles = StyleSheet.create({
   },
 
   capitalImageContainer: {
-    width: 280,
-    height: 210,
+    width: 200,
+    height: 150,
+    justifyContent: 'center',
   },
 
   capitalImage: {
@@ -198,13 +218,14 @@ const styles = StyleSheet.create({
     width: undefined,
     height: undefined,
     resizeMode: 'contain',
+    padding: 3,
     // shadow - iOS
     shadowColor: '#000',
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.3,
-    shadowRadius: 4,
+    shadowRadius: 3,
     // shadow - Android
-    elevation: 5,
+    elevation: 2,
   },
 
   noImageText: {
