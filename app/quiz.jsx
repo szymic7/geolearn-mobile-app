@@ -8,77 +8,111 @@ import Timer from "../components/ui/Timer";
 
 export default function Quiz(
     {currentQuestion = "1",
-        numOfQuestions = "1",
-        question = "Kiedy zgolisz brode",
-        answer0 = "Nigdy",
-        answer1 = "Zaraz",
-        answer2 = "Facet bez brody",
-        answer3 = "Jest jak krowa bez ogona",
-        correctAnswer = 0}) {
+        numOfQuestions = "3",
+        questionList = [
+            {
+                question: "Kiedy zgolisz brodę?",
+                answers: ["Nigdy", "Zaraz", "Facet bez brody", "Jest jak krowa bez ogona"],
+                correctAnswer: 0,
+            },
 
+            {
+                question: "Ulubiony kolor?",
+                answers: ["Czerwony", "Niebieski", "Zielony", "Żółty"],
+                correctAnswer: 1,
+            },
+
+            {
+                question: "Czy React Native jest fajny?",
+                answers: ["Tak", "Nie", "Czasami", "Nie wiem"],
+                correctAnswer: 0,
+            },
+
+        ],
+    }) {
+
+    const [currentIndex, setCurrentIndex] = useState(currentQuestion - 1);
     const [selected, setSelected] = useState(null);
     const [submitted, setSubmitted] = useState(false);
     const [isCorrect, setIsCorrect] = useState(-1);
+    const [correctCount, setCorrectCount] = useState(0);
+
+    const current = questionList[currentIndex];
+    const {question, answers, correctAnswer} = current;
 
     useEffect(() => {
         if (submitted && selected !== -1) {
-            setIsCorrect(selected === correctAnswer);
+            const result = selected === correctAnswer;
+            setIsCorrect(result);
+            if (result) {
+                setCorrectCount(prev => prev + 1);
+            }
         }
-    }, [submitted, selected]);
+    }, [submitted]);
 
-    return <View style={styles.container}>
+    const handleNext = () => {
+        if (currentIndex + 1 < numOfQuestions) {
+            setCurrentIndex(currentIndex + 1);
+            setSelected(-1);
+            setSubmitted(false);
+            setIsCorrect(false);
+        } else {
+            console.log("All questions answered!");
+            console.log("Correct answers:", correctCount, "/", numOfQuestions);
+        }
+    };
 
-        <View style={styles.burgerArea}>
-            <BurgerMenuButton/>
-        </View>
-
-        <View style={styles.topSection}>
-
-            <View style={styles.additions}>
-
-                <Text style={styles.addText}> {currentQuestion}/{numOfQuestions} </Text>
-
-                <Timer
-                    startSeconds={30}
-                    disabled={submitted}
-                    onFinish={() => {
-                        if (!submitted) setSubmitted(true);
-                    }}
-                />
-
+    return (
+        <View style={styles.container}>
+            <View style={styles.burgerArea}>
+                <BurgerMenuButton />
             </View>
 
-            <View style={styles.questionContainer}>
-                <Text style={styles.questionStyle}>
-                    {question}
-                </Text>
-            </View>
+            <View style={styles.topSection}>
+                <View style={styles.additions}>
+                    <Text style={styles.addText}>
+                        {currentIndex + 1}/{numOfQuestions}
+                    </Text>
 
-        </View>
-
-        <View style={styles.middleSection}>
-            <View style={styles.answersContainer}>
-                {[answer0, answer1, answer2, answer3].map((answer, index) => (
-                    <QuizButton
-                        key={index}
-                        text={answer}
-                        isSelected={selected === index}
-                        onPress={() => setSelected(index)}
+                    <Timer
+                        key={currentIndex}
+                        startSeconds={10}
                         disabled={submitted}
-                        showResult={submitted}
-                        isCorrect={index === correctAnswer}
-                        isChosen={selected === index}
+                        onFinish={() => {
+                            if (!submitted) setSubmitted(true);
+                        }}
                     />
-                ))}
+                </View>
+
+                <View style={styles.questionContainer}>
+                    <Text style={styles.questionStyle}>{question}</Text>
+                </View>
             </View>
 
-            <SubmitNextButton
-                submitted={submitted}
-                onSubmit={() => setSubmitted(true)}
-            />
-        </View>
+            <View style={styles.middleSection}>
+                <View style={styles.answersContainer}>
+                    {answers.map((answer, index) => (
+                        <QuizButton
+                            key={index}
+                            text={answer}
+                            isSelected={selected === index}
+                            onPress={() => setSelected(index)}
+                            disabled={submitted}
+                            showResult={submitted}
+                            isCorrect={index === correctAnswer}
+                            isChosen={selected === index}
+                        />
+                    ))}
+                </View>
 
-    </View>
+                <SubmitNextButton
+                    submitted={submitted}
+                    onSubmit={() => setSubmitted(true)}
+                    onNext={handleNext}
+                />
+            </View>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

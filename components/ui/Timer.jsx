@@ -6,8 +6,7 @@ export default function Timer({ startSeconds = 30, onFinish, disabled = false })
     const [seconds, setSeconds] = useState(startSeconds);
 
     useEffect(() => {
-        // Stop timer when disabled or reached 0
-        if (disabled || seconds <= 0) return;
+        if (disabled) return;
 
         const interval = setInterval(() => {
             setSeconds(prev => {
@@ -21,7 +20,7 @@ export default function Timer({ startSeconds = 30, onFinish, disabled = false })
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [disabled, seconds]);
+    }, [disabled]);
 
     const formatTime = (secs) => {
         const minutes = Math.floor(secs / 60);

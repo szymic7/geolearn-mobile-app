@@ -2,10 +2,14 @@ import {Pressable, StyleSheet, Text} from "react-native";
 import Colors from "../../utils/colors";
 import {useState} from "react";
 
-export default function SubmitNextButton({ submitted = false, onSubmit }) {
+export default function SubmitNextButton({ submitted = false, onSubmit, onNext }) {
 
     const handlePress = () => {
-        if (!submitted && onSubmit) onSubmit();   // only works once
+        if (!submitted && onSubmit) {
+            onSubmit();
+        } else if (submitted && onNext) {
+            onNext();
+        }
     };
 
     return (
