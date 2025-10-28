@@ -106,7 +106,7 @@ export default function Login() {
                   <Text style={styles.error}>{error.password}</Text>
                 )}
               </View>
-              <CustomBtn type="green" onPress={handleSubmit}>
+              <CustomBtn type="green" onPress={handleSubmit} disabled={loading}>
                 {loading ? "Loading..." : "Login"}
               </CustomBtn>
               {authError && <Text style={styles.error}>{authError}</Text>}

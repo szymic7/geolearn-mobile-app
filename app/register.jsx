@@ -25,6 +25,8 @@ export default function Register() {
 
   const { register, loading, authError, clearError } = useAuth();
 
+  // TODO: email with uppercase is different than in lowercase.
+  //  It should be equal. Add somewhere lowercase() function. Discuss adding it in backend
   function validate() {
     const newErrors = {};
     if (!name.trim()) newErrors.name = "Name is required";
@@ -150,7 +152,7 @@ export default function Register() {
                 mode="outlined"
               />
             </View>
-            <CustomBtn type="green" onPress={handleSubmit}>
+            <CustomBtn type="green" onPress={handleSubmit} disabled={loading}>
               {loading ? "Loading..." : "Sign up"}
             </CustomBtn>
             {authError && <Text style={styles.error}>{authError}</Text>}
