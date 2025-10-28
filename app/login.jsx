@@ -1,5 +1,6 @@
 import { Link } from "@react-navigation/native";
-import { useState } from "react";
+import { router } from "expo-router";
+import { useEffect, useState } from "react";
 import {
   ImageBackground,
   Keyboard,
@@ -12,12 +13,14 @@ import {
 } from "react-native";
 import { TextInput } from "react-native-paper";
 import CustomBtn from "../components/ui/CustomBtn";
+import { useAuth } from "../contexts/authContext";
 import Colors from "../utils/colors";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [error, setError] = useState({});
+  const { login, loading, authError, clearError } = useAuth();
 
   function validate() {
     const newErrors = {};
@@ -28,17 +31,28 @@ export default function Login() {
 
     if (!password.trim()) newErrors.password = "Password is required";
 
-    setErrors(newErrors);
+    setError(newErrors);
 
     return Object.keys(newErrors).length === 0;
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     const ok = validate();
     if (ok) {
-      alert("Logged in successfully");
+      const success = await login(email, password);
+      if (success) {
+        router.navigate("/home");
+      }
     }
   }
+
+  //TODO: fix clear authError when user starts typing new data in TextInput
+  useEffect(
+    function () {
+      clearError();
+    },
+    [clearError]
+  );
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -61,8 +75,8 @@ export default function Login() {
                   style={styles.input}
                   onChangeText={(text) => {
                     setEmail(text);
-                    if (errors.email)
-                      setErrors((e) => ({ ...e, email: undefined }));
+                    if (error.email)
+                      setError((e) => ({ ...e, email: undefined }));
                   }}
                   value={email}
                   placeholder="Email"
@@ -70,9 +84,7 @@ export default function Login() {
                   right={<TextInput.Icon icon="email" />}
                   mode="outlined"
                 />
-                {errors.email && (
-                  <Text style={styles.error}>{errors.email}</Text>
-                )}
+                {error.email && <Text style={styles.error}>{error.email}</Text>}
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Password</Text>
@@ -80,8 +92,8 @@ export default function Login() {
                   style={styles.input}
                   onChangeText={(text) => {
                     setPassword(text);
-                    if (errors.password)
-                      setErrors((e) => ({ ...e, password: undefined }));
+                    if (error.password)
+                      setError((e) => ({ ...e, password: undefined }));
                   }}
                   value={password}
                   placeholder="Password"
@@ -90,13 +102,14 @@ export default function Login() {
                   mode="outlined"
                 />
 
-                {errors.password && (
-                  <Text style={styles.error}>{errors.password}</Text>
+                {error.password && (
+                  <Text style={styles.error}>{error.password}</Text>
                 )}
               </View>
               <CustomBtn type="green" onPress={handleSubmit}>
-                Login
+                {loading ? "Loading..." : "Login"}
               </CustomBtn>
+              {authError && <Text style={styles.error}>{authError}</Text>}
               <Text>
                 New in GeoLearn?{" "}
                 <Link screen="register" style={styles.link}>

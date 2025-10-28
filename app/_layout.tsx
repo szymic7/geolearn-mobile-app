@@ -1,26 +1,29 @@
 import { Stack } from "expo-router";
+import { AuthProvider } from "../contexts/authContext";
 
 export default function RootLayout() {
   return (
-    <Stack
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: "#3ABB51",
-        },
-        headerTintColor: "#fff",
-        headerTitleStyle: {
-          fontWeight: "bold",
-        },
-      }}
-    >
-      <Stack.Screen name="index" />
-      <Stack.Screen name="landing" />
-      <Stack.Screen name="login" />
-      <Stack.Screen name="register" />
-      <Stack.Screen name="home" />
-      <Stack.Screen name="quizChoice" />
-      <Stack.Screen name="continentsChoice" />
-      <Stack.Screen name="ccQuiz" />
-    </Stack>
+    <AuthProvider>
+      <Stack
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: "#3ABB51",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
+        }}
+      >
+        <Stack.Screen name="index" />
+        <Stack.Screen name="landing" />
+        <Stack.Screen name="login" />
+        <Stack.Screen name="register" />
+        <Stack.Screen name="home" />
+        <Stack.Screen name="quizChoice" />
+        <Stack.Screen name="continentsChoice" />
+        <Stack.Screen name="ccQuiz" />
+      </Stack>
+    </AuthProvider>
   );
 }
