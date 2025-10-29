@@ -1,7 +1,9 @@
+import { useAuth } from "@/contexts/authContext";
 import { Link } from "expo-router";
-import { View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 export default function Index() {
+  const { logout } = useAuth();
   return (
     <View
       style={{
@@ -11,6 +13,9 @@ export default function Index() {
         gap: 20,
       }}
     >
+      <TouchableOpacity onPress={logout}>
+        <Text>Logout (auto login testing)</Text>
+      </TouchableOpacity>
       <Link href="/landing">Click here to see auth landing page</Link>
       <Link href="/login">Click here to see login page</Link>
       <Link href="/register">Click here to see register page</Link>
