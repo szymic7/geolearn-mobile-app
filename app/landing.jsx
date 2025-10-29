@@ -1,10 +1,33 @@
-import { useNavigation } from "expo-router";
+import { router, useNavigation } from "expo-router";
+import * as SecureStore from "expo-secure-store";
+import { useEffect } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import CustomBtn from "../components/ui/CustomBtn";
+import { useAuth } from "../contexts/authContext";
 import Colors from "../utils/colors";
 
 export default function Landing() {
   const navigation = useNavigation();
+
+  const { loginWithToken, isAuthenticated } = useAuth();
+
+  useEffect(
+    function () {
+      async function checkLogin() {
+        if (isAuthenticated) {
+          router.navigate("/home");
+          return;
+        }
+
+        const token = await SecureStore.getItemAsync("token");
+        if (token) {
+          await loginWithToken(token);
+        }
+      }
+      checkLogin();
+    },
+    [isAuthenticated, loginWithToken]
+  );
 
   return (
     <View style={styles.container}>
