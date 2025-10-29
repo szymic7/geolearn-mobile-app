@@ -5,6 +5,8 @@ const Colors = {
 
   secondary: "#FFFAEC",
 
+  contrasting: "#ff9c7e",
+
   background: "#fff",
 
   textPrimary: "#1D1B20",

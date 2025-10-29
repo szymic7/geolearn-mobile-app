@@ -1,8 +1,17 @@
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 
-export default function CustomBtn({ type, onPress, children }) {
+export default function CustomBtn({
+  type,
+  onPress,
+  disabled = false,
+  children,
+}) {
   return (
-    <TouchableHighlight onPress={onPress}>
+    <TouchableHighlight
+      onPress={!disabled ? onPress : null}
+      underlayColor="transparent"
+      style={{ opacity: disabled ? 0.6 : 1 }}
+    >
       <View style={[styles.btn, styles[type]]}>
         <Text style={[textStyles.text, textStyles[type]]}>{children}</Text>
       </View>
@@ -18,21 +27,20 @@ const styles = StyleSheet.create({
     borderRadius: 19,
     // boxShadow:"5px 5px 5px 1px rgb(0, 0, 0,0.15)",
     width: 280,
-    height: 50
+    height: 50,
   },
-
 
   gray: {
     backgroundColor: "#D9D9D9",
   },
   green: {
     backgroundColor: "#3ABB51",
-    color: "#fff"
-  }
+    color: "#fff",
+  },
 });
 
 const textStyles = StyleSheet.create({
-    text: {
+  text: {
     fontWeight: 700,
     fontFamily: "Montserrat",
     fontSize: 16,
@@ -42,5 +50,5 @@ const textStyles = StyleSheet.create({
   },
   gray: {
     color: "#000",
-  }
-})
+  },
+});

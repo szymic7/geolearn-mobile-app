@@ -1,6 +1,8 @@
 import { Link } from "@react-navigation/native";
-import { useState } from "react";
+import { router } from "expo-router";
+import { useEffect, useState } from "react";
 import {
+  Alert,
   ImageBackground,
   KeyboardAvoidingView,
   Platform,
@@ -11,6 +13,7 @@ import {
 } from "react-native";
 import { TextInput } from "react-native-paper";
 import CustomBtn from "../components/ui/CustomBtn";
+import { useAuth } from "../contexts/authContext";
 import Colors from "../utils/colors";
 
 export default function Register() {
@@ -18,8 +21,12 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [error, setError] = useState({});
 
+  const { register, loading, authError, clearError } = useAuth();
+
+  // TODO: email with uppercase is different than in lowercase.
+  //  It should be equal. Add somewhere lowercase() function. Discuss adding it in backend
   function validate() {
     const newErrors = {};
     if (!name.trim()) newErrors.name = "Name is required";
@@ -34,18 +41,33 @@ export default function Register() {
     else if (password !== repeatPassword)
       newErrors.password = "Passwords do not match";
 
-    setErrors(newErrors);
+    setError(newErrors);
 
     return Object.keys(newErrors).length === 0;
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     const ok = validate();
     if (ok) {
-      alert("Account created successfully");
-      //TODO: Implement registration logic
+      const success = await register({ name, email, password });
+
+      if (success) {
+        Alert.alert(
+          "Success",
+          "Congratulations, your account has been successfully created."
+        );
+        router.navigate("/login");
+      }
     }
   }
+
+  //TODO: fix clear authError when user starts typing new data in TextInput
+  useEffect(
+    function () {
+      clearError();
+    },
+    [clearError]
+  );
 
   return (
     <ImageBackground
@@ -72,8 +94,7 @@ export default function Register() {
                 style={styles.input}
                 onChangeText={(text) => {
                   setName(text);
-                  if (errors.name)
-                    setErrors((e) => ({ ...e, name: undefined }));
+                  if (error.name) setError((e) => ({ ...e, name: undefined }));
                 }}
                 value={name}
                 placeholder="Mateusz"
@@ -81,7 +102,7 @@ export default function Register() {
                 right={<TextInput.Icon icon="account" />}
                 mode="outlined"
               />
-              {errors.name && <Text style={styles.error}>{errors.name}</Text>}
+              {error.name && <Text style={styles.error}>{error.name}</Text>}
             </View>
             <View style={styles.row}>
               <Text style={styles.label}>Email</Text>
@@ -89,8 +110,8 @@ export default function Register() {
                 style={styles.input}
                 onChangeText={(text) => {
                   setEmail(text);
-                  if (errors.email)
-                    setErrors((e) => ({ ...e, email: undefined }));
+                  if (error.email)
+                    setError((e) => ({ ...e, email: undefined }));
                 }}
                 value={email}
                 placeholder="bleksy@gmail.com"
@@ -98,7 +119,7 @@ export default function Register() {
                 right={<TextInput.Icon icon="email" />}
                 mode="outlined"
               />
-              {errors.email && <Text style={styles.error}>{errors.email}</Text>}
+              {error.email && <Text style={styles.error}>{error.email}</Text>}
             </View>
             <View style={styles.row}>
               <Text style={styles.label}>Password</Text>
@@ -106,8 +127,8 @@ export default function Register() {
                 style={styles.input}
                 onChangeText={(text) => {
                   setPassword(text);
-                  if (errors.password)
-                    setErrors((e) => ({ ...e, password: undefined }));
+                  if (error.password)
+                    setError((e) => ({ ...e, password: undefined }));
                 }}
                 value={password}
                 placeholder="Password"
@@ -115,8 +136,8 @@ export default function Register() {
                 right={<TextInput.Icon icon="lock" />}
                 mode="outlined"
               />
-              {errors.password && (
-                <Text style={styles.error}>{errors.password}</Text>
+              {error.password && (
+                <Text style={styles.error}>{error.password}</Text>
               )}
             </View>
             <View style={styles.row}>
@@ -131,9 +152,10 @@ export default function Register() {
                 mode="outlined"
               />
             </View>
-            <CustomBtn type="green" onPress={handleSubmit}>
-              Sign up
+            <CustomBtn type="green" onPress={handleSubmit} disabled={loading}>
+              {loading ? "Loading..." : "Sign up"}
             </CustomBtn>
+            {authError && <Text style={styles.error}>{authError}</Text>}
             <Text>
               Have already account?{" "}
               <Link screen="login" style={styles.link}>
