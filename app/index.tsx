@@ -22,8 +22,9 @@ export default function Index() {
       <Link href="/home">Home</Link>
       <Link href="/regionChoiceFlags">Learn flags</Link>
       <Link href="/regionChoiceCapitals">Learn capitals</Link>
-      <Link href="/quizChoice">Quiz</Link>
+      <Link href="/quizChoice">Quiz Choice</Link>
       <Link href="/continentsChoiceQuiz">Continents Choice Quiz</Link>
+      <Link href="/quiz">Quiz</Link>
     </View>
   );
 }
