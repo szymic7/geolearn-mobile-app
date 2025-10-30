@@ -5,9 +5,11 @@ import Colors from "../utils/colors";
 import QuizButton from "../components/ui/QuizButton";
 import SubmitNextButton from "../components/ui/SubmitNextButton";
 import Timer from "../components/ui/Timer";
+import {useRouter} from "expo-router";
 
 export default function Quiz(
-    {currentQuestion = "1",
+    {
+        currentQuestion = "1",
         numOfQuestions = "3",
         questionList = [
             {
@@ -57,10 +59,17 @@ export default function Quiz(
             setSubmitted(false);
             setIsCorrect(false);
         } else {
-            console.log("All questions answered!");
-            console.log("Correct answers:", correctCount, "/", numOfQuestions);
+            router.push({
+                pathname: "/result",
+                params: {
+                    correctAnswers: correctCount,
+                    numOfQuestions: numOfQuestions,
+                },
+            });
         }
     };
+
+    const router = useRouter();
 
     return (
         <View style={styles.container}>

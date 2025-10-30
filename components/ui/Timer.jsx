@@ -12,7 +12,13 @@ export default function Timer({ startSeconds = 30, onFinish, disabled = false })
             setSeconds(prev => {
                 if (prev <= 1) {
                     clearInterval(interval);
-                    if (onFinish) onFinish();
+
+                    if (onFinish)
+                    {
+                        // Delay to avoid triggering React state updates mid-render
+                        setTimeout(() => onFinish(), 0);
+                    }
+
                     return 0;
                 }
                 return prev - 1;
