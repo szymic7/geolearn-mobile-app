@@ -141,7 +141,7 @@ export default function Quiz() {
 
                     <Timer
                         key={currentIndex}
-                        startSeconds={15}
+                        startSeconds={20}
                         disabled={submitted}
                         onFinish={() => {
                         if (!submitted) setSubmitted(true);

@@ -5,7 +5,7 @@ import ContinentsTileButton from "../components/ui/ContinentsTileButton";
 import Header from '../components/ui/Header';
 import Colors from "../utils/colors";
 
-export default function ContinentsChoiceQuiz() {
+export default function QuizRegionChoice() {
     const router = useRouter();
     
     const handleSelectRegion = (category) => {

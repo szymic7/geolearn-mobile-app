@@ -5,12 +5,12 @@ import Header from '../components/ui/Header';
 import HomeTileButton from '../components/ui/HomeTileButton';
 import Colors from "../utils/colors";
 
-export default function QuizChoice() {
+export default function QuizCategoryChoice() {
     const router = useRouter();
 
     const handleSelectCategory = (category) => {
         if (category === "mixed") {
-            router.push("/continentsChoiceQuiz")
+            router.push("/quizRegionChoice")
         } else {
             router.push({
                 pathname: "/quiz",

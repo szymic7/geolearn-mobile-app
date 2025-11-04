@@ -5,8 +5,15 @@ import ContinentsTileButton from "../components/ui/ContinentsTileButton";
 import Header from "../components/ui/Header";
 import Colors from "../utils/colors";
 
-export default function RegionChoiceFlags() {
+export default function FlagsRegionChoice() {
   const router = useRouter();
+
+  const handleSelectRegion = (region) => {
+      router.push({
+        pathname: "/flags",
+        params: { region },
+      });
+    };
 
   return (
     <View style={styles.container}>
@@ -21,37 +28,37 @@ export default function RegionChoiceFlags() {
           <ContinentsTileButton
             title="Europe"
             imageSource={require("../assets/images/Europe_cc.png")}
-            onPress={() => router.push("/flagsEurope")}
+            onPress={() => handleSelectRegion("europe")}
           />
           <ContinentsTileButton
             title="Asia"
             imageSource={require("../assets/images/Asia_cc.png")}
-            onPress={() => router.push("/flagsAsia")}
+            onPress={() => handleSelectRegion("asia")}
           />
           <ContinentsTileButton
             title="Africa"
             imageSource={require("../assets/images/Africa_cc.png")}
-            onPress={() => router.push("/flagsAfrica")}
+            onPress={() => handleSelectRegion("africa")}
           />
           <ContinentsTileButton
             title="North America"
             imageSource={require("../assets/images/NorthAmerica_cc.png")}
-            onPress={() => router.push("/flagsNorthAmerica")}
+            onPress={() => handleSelectRegion("north_america")}
           />
           <ContinentsTileButton
             title="South America"
             imageSource={require("../assets/images/SouthAmerica_cc.png")}
-            onPress={() => router.push("/flagsSouthAmerica")}
+            onPress={() => handleSelectRegion("south_america")}
           />
           <ContinentsTileButton
             title="Australia"
             imageSource={require("../assets/images/Australia_cc.png")}
-            onPress={() => router.push("/flagsAustralia")}
+            onPress={() => handleSelectRegion("australia")}
           />
           <ContinentsTileButton
             title="World"
             imageSource={require("../assets/images/World_cc.png")}
-            onPress={() => router.push("/flagsWorld")}
+            onPress={() => handleSelectRegion("world")}
           />
         </View>
       </ScrollView>

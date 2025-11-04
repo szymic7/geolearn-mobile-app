@@ -1,3 +1,4 @@
+import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, StyleSheet, Text, View } from 'react-native';
 import BurgerMenuButton from '../components/ui/BurgerMenuButton';
@@ -5,14 +6,26 @@ import FlagsViewer from '../components/ui/FlagsViewer';
 import { FLAGS_ENDPOINTS } from '../constants/api';
 import Colors from "../utils/colors";
 
-export default function FlagsAustralia() {
+const REGION_TO_URL_MAP = {
+    europe: FLAGS_ENDPOINTS.EUROPEAN_FLAGS,
+    asia: FLAGS_ENDPOINTS.ASIAN_FLAGS,
+    africa: FLAGS_ENDPOINTS.AFRICAN_FLAGS,
+    north_america: FLAGS_ENDPOINTS.NORTH_AMERICAN_FLAGS,
+    south_america: FLAGS_ENDPOINTS.SOUTH_AMERICAN_FLAGS,
+    australia: FLAGS_ENDPOINTS.AUSTRALIAN_FLAGS,
+    world: FLAGS_ENDPOINTS.ALL_FLAGS
+}
+
+export default function Flags() {
+    const { region } = useLocalSearchParams();
     const [countries, setCountries] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchCountries = async () => {
         try {
-            const response = await fetch(FLAGS_ENDPOINTS.AUSTRALIAN_FLAGS);
+            const url = REGION_TO_URL_MAP[region] || FLAGS_ENDPOINTS.ALL_FLAGS;
+            const response = await fetch(url);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
