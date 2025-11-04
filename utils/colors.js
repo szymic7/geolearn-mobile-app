@@ -10,7 +10,7 @@ const Colors = {
   background: "#fff",
 
   textPrimary: "#1D1B20",
-  textSecondary: "",
+  textLight: "#999",
   textInverse: "#fff",
 
   error: "#A61515",
@@ -21,7 +21,6 @@ const Colors = {
 
   correctAnswer: "#3ABB51",
   wrongAnswer: "#f03e3e",
-
 };
 
 export default Colors;

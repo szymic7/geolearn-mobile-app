@@ -1,19 +1,19 @@
 import { useRouter } from "expo-router";
 import { ScrollView, StyleSheet, View } from "react-native";
-import BurgerMenuButton from "../components/ui/BurgerMenuButton";
-import ContinentsTileButton from "../components/ui/ContinentsTileButton";
-import Header from "../components/ui/Header";
-import Colors from "../utils/colors";
+import BurgerMenuButton from "../../components/ui/BurgerMenuButton";
+import ContinentsTileButton from "../../components/ui/ContinentsTileButton";
+import Header from "../../components/ui/Header";
+import Colors from "../../utils/colors";
 
 export default function FlagsRegionChoice() {
   const router = useRouter();
 
   const handleSelectRegion = (region) => {
-      router.push({
-        pathname: "/flags",
-        params: { region },
-      });
-    };
+    router.push({
+      pathname: "/flags",
+      params: { region },
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -27,37 +27,37 @@ export default function FlagsRegionChoice() {
         <View style={styles.tilesContainer}>
           <ContinentsTileButton
             title="Europe"
-            imageSource={require("../assets/images/Europe_cc.png")}
+            imageSource={require("../../assets/images/Europe_cc.png")}
             onPress={() => handleSelectRegion("europe")}
           />
           <ContinentsTileButton
             title="Asia"
-            imageSource={require("../assets/images/Asia_cc.png")}
+            imageSource={require("../../assets/images/Asia_cc.png")}
             onPress={() => handleSelectRegion("asia")}
           />
           <ContinentsTileButton
             title="Africa"
-            imageSource={require("../assets/images/Africa_cc.png")}
+            imageSource={require("../../assets/images/Africa_cc.png")}
             onPress={() => handleSelectRegion("africa")}
           />
           <ContinentsTileButton
             title="North America"
-            imageSource={require("../assets/images/NorthAmerica_cc.png")}
+            imageSource={require("../../assets/images/NorthAmerica_cc.png")}
             onPress={() => handleSelectRegion("north_america")}
           />
           <ContinentsTileButton
             title="South America"
-            imageSource={require("../assets/images/SouthAmerica_cc.png")}
+            imageSource={require("../../assets/images/SouthAmerica_cc.png")}
             onPress={() => handleSelectRegion("south_america")}
           />
           <ContinentsTileButton
             title="Australia"
-            imageSource={require("../assets/images/Australia_cc.png")}
+            imageSource={require("../../assets/images/Australia_cc.png")}
             onPress={() => handleSelectRegion("australia")}
           />
           <ContinentsTileButton
             title="World"
-            imageSource={require("../assets/images/World_cc.png")}
+            imageSource={require("../../assets/images/World_cc.png")}
             onPress={() => handleSelectRegion("world")}
           />
         </View>
