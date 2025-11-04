@@ -1,4 +1,3 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import ScreenLayout from "../../components/layout/ScreenLayout";
@@ -8,13 +7,11 @@ import HomeTileButton from "../../components/ui/HomeTileButton";
 import Colors from "../../utils/colors";
 
 export default function Home() {
-  const navigation = useNavigation();
-
   return (
     <ScreenLayout>
       <View style={styles.container}>
         <View style={styles.burgerArea}>
-          <BurgerMenuButton onPress={() => navigation.toggleDrawer()} />
+          <BurgerMenuButton />
         </View>
 
         <ScrollView contentContainerStyle={styles.mainContent}>
