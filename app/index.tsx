@@ -1,4 +1,5 @@
 import { useAuth } from "@/contexts/authContext";
+// import {Redirect} from "expo-router";
 import { Link } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
 
@@ -25,4 +26,6 @@ export default function Index() {
       <Link href="/quizCategoryChoice">Quizzes</Link>
     </View>
   );
+
+  // return <Redirect href="/home" />;
 }
