@@ -1,10 +1,12 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
+import * as SecureStore from "expo-secure-store";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import BurgerMenuButton from "../components/ui/BurgerMenuButton";
 import QuizButton from "../components/ui/QuizButton";
 import SubmitNextButton from "../components/ui/SubmitNextButton";
 import Timer from "../components/ui/Timer";
+import { QUIZ_ENDPOINTS } from "../constants/api";
 import { fetchAllQuestions } from "../services/quizService";
 import Colors from "../utils/colors";
 
@@ -45,12 +47,45 @@ export default function Quiz() {
         }
     };
 
-    const handleNext = () => {
+    const handleNext = async () => {
         if (currentIndex + 1 < questions.length) {
             setCurrentIndex((prev) => prev + 1);
             setSelected(-1);
             setSubmitted(false);
         } else {
+            try {
+                const token = await SecureStore.getItemAsync("token");
+
+                if (!token) {
+                    console.warn("No auth token found");
+                    return;
+                }
+
+                // Prepare payload
+                const payload = 
+                category === "flags" || category === "capitals"
+                    ? { category, subcategory: "world", score: correctCount }
+                    : { category: "mixed", subcategory: category, score: correctCount };
+
+                // Send POST request
+                const response = await fetch(QUIZ_ENDPOINTS.SUBMIT, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify(payload),
+                });
+
+                if (!response.ok) {
+                    console.error("Failed to save result:", response.status);
+                } else {
+                    console.log("✅ Quiz result saved successfully");
+                }
+
+            } catch (error) {
+                console.error("Error saving result:", error);
+            }
             router.push({
                 pathname: "/result",
                 params: {

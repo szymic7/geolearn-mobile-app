@@ -1,11 +1,13 @@
-import React from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import { useRouter } from "expo-router";
+import { ScrollView, StyleSheet, View } from 'react-native';
 import BurgerMenuButton from '../components/ui/BurgerMenuButton';
 import Header from '../components/ui/Header';
 import HomeTileButton from '../components/ui/HomeTileButton';
 import Colors from "../utils/colors";
 
 export default function Home() {
+    const router = useRouter();
+
     return <View style={styles.container}>
 
         <View style={styles.burgerArea}>
@@ -19,6 +21,7 @@ export default function Home() {
                 <HomeTileButton
                     title="Flags"
                     imageSource={require('../assets/images/img_flags.png')}
+                    onPress={() => router.push("/regionChoiceFlags")}
                 />
                 <HomeTileButton
                     title="Maps"
@@ -27,10 +30,12 @@ export default function Home() {
                 <HomeTileButton
                     title="Capitals"
                     imageSource={require('../assets/images/img_capitals.png')}
+                    onPress={() => router.push("/regionChoiceCapitals")}
                 />
                 <HomeTileButton
                     title="Try yourself in quizzes"
                     imageSource={require('../assets/images/img_quizzes.png')}
+                    onPress={() => router.push("/quizChoice")}
                 />
             </View>
         </ScrollView>

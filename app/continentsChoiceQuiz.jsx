@@ -22,7 +22,7 @@ export default function ContinentsChoiceQuiz() {
         </View>
 
         <ScrollView contentContainerStyle={styles.mainContent}>
-            <Header style={styles.head} title="Select a region" />
+            <Header style={styles.head} title="Select region" />
 
             <View style={styles.tilesContainer}>
                 <ContinentsTileButton

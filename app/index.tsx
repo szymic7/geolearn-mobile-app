@@ -23,9 +23,6 @@ export default function Index() {
       <Link href="/regionChoiceFlags">Learn flags</Link>
       <Link href="/regionChoiceCapitals">Learn capitals</Link>
       <Link href="/quizChoice">Quiz Choice</Link>
-      <Link href="/continentsChoiceQuiz">Continents Choice Quiz</Link>
-      <Link href="/quiz">Quiz</Link>
-      <Link href="/result">Quiz Result</Link>
     </View>
   );
 }
