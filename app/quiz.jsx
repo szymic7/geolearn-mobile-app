@@ -1,75 +1,96 @@
-import {StyleSheet, Text, View} from "react-native";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import BurgerMenuButton from "../components/ui/BurgerMenuButton";
-import React, {useEffect, useState} from "react";
-import Colors from "../utils/colors";
 import QuizButton from "../components/ui/QuizButton";
 import SubmitNextButton from "../components/ui/SubmitNextButton";
 import Timer from "../components/ui/Timer";
-import {useRouter} from "expo-router";
+import { fetchAllQuestions } from "../services/quizService";
+import Colors from "../utils/colors";
 
-export default function Quiz(
-    {
-        currentQuestion = "1",
-        numOfQuestions = "3",
-        questionList = [
-            {
-                question: "Kiedy zgolisz brodę?",
-                answers: ["Nigdy", "Zaraz", "Facet bez brody", "Jest jak krowa bez ogona"],
-                correctAnswer: 0,
-            },
+export default function Quiz() {
+    const { category } = useLocalSearchParams();
 
-            {
-                question: "Ulubiony kolor?",
-                answers: ["Czerwony", "Niebieski", "Zielony", "Żółty"],
-                correctAnswer: 1,
-            },
-
-            {
-                question: "Czy React Native jest fajny?",
-                answers: ["Tak", "Nie", "Czasami", "Nie wiem"],
-                correctAnswer: 0,
-            },
-
-        ],
-    }) {
-
-    const [currentIndex, setCurrentIndex] = useState(currentQuestion - 1);
-    const [selected, setSelected] = useState(null);
+    const [questions, setQuestions] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [selected, setSelected] = useState(-1);
     const [submitted, setSubmitted] = useState(false);
-    const [isCorrect, setIsCorrect] = useState(-1);
     const [correctCount, setCorrectCount] = useState(0);
-
-    const current = questionList[currentIndex];
-    const {question, answers, correctAnswer} = current;
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const router = useRouter();
 
     useEffect(() => {
-        if (submitted && selected !== -1) {
-            const result = selected === correctAnswer;
-            setIsCorrect(result);
-            if (result) {
-                setCorrectCount(prev => prev + 1);
+        const loadQuestions = async () => {
+        try {
+            const data = await fetchAllQuestions(category);
+            setQuestions(data);
+        } catch (err) {
+            setError("Failed to load quiz questions. Please try again later.");
+        } finally {
+            setLoading(false);
+        }
+        };
+
+        loadQuestions();
+    }, []);
+
+    const handleSubmit = () => {
+        if (selected !== -1) {
+            const result = selected === questions[currentIndex].correctAnswerIndex;
+            setSubmitted(true);
+            if (result) { 
+                setCorrectCount((prev) => prev + 1);
             }
         }
-    }, [submitted]);
+    };
 
     const handleNext = () => {
-        if (currentIndex + 1 < numOfQuestions) {
-            setCurrentIndex(currentIndex + 1);
+        if (currentIndex + 1 < questions.length) {
+            setCurrentIndex((prev) => prev + 1);
             setSelected(-1);
             setSubmitted(false);
-            setIsCorrect(false);
         } else {
             router.push({
                 pathname: "/result",
                 params: {
                     correctAnswers: correctCount,
-                    numOfQuestions: numOfQuestions,
+                    numOfQuestions: questions.length,
                 },
             });
         }
     };
 
-    const router = useRouter();
+    if (loading) {
+        return (
+        <View style={[styles.container, { justifyContent: "center" }]}>
+            <ActivityIndicator size="large" color={Colors.primaryDark} />
+            <Text style={{ marginTop: 20, color: Colors.secondary }}>
+                Loading questions...
+            </Text>
+        </View>
+        );
+    }
+
+    if (error) {
+        return (
+        <View style={[styles.container, { justifyContent: "center" }]}>
+            <Text style={{ color: "red", marginBottom: 10 }}>{error}</Text>
+            <Text style={{ color: Colors.secondary }}>Please restart the quiz.</Text>
+        </View>
+        );
+    }
+
+    if (questions.length === 0) {
+        return (
+            <View style={[styles.container, { justifyContent: "center" }]}>
+                <Text style={{ color: Colors.secondary }}>No questions available.</Text>
+            </View>
+        );
+    }
+
+    const current = questions[currentIndex];
+    const { question, answers, correctAnswerIndex } = current;
 
     return (
         <View style={styles.container}>
@@ -80,15 +101,15 @@ export default function Quiz(
             <View style={styles.topSection}>
                 <View style={styles.additions}>
                     <Text style={styles.addText}>
-                        {currentIndex + 1}/{numOfQuestions}
+                        {currentIndex + 1}/{questions.length}
                     </Text>
 
                     <Timer
                         key={currentIndex}
-                        startSeconds={10}
+                        startSeconds={15}
                         disabled={submitted}
                         onFinish={() => {
-                            if (!submitted) setSubmitted(true);
+                        if (!submitted) setSubmitted(true);
                         }}
                     />
                 </View>
@@ -108,7 +129,7 @@ export default function Quiz(
                             onPress={() => setSelected(index)}
                             disabled={submitted}
                             showResult={submitted}
-                            isCorrect={index === correctAnswer}
+                            isCorrect={index === correctAnswerIndex}
                             isChosen={selected === index}
                         />
                     ))}
@@ -116,7 +137,7 @@ export default function Quiz(
 
                 <SubmitNextButton
                     submitted={submitted}
-                    onSubmit={() => setSubmitted(true)}
+                    onSubmit={handleSubmit}
                     onNext={handleNext}
                 />
             </View>

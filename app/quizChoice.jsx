@@ -1,11 +1,24 @@
-import React from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import { useRouter } from 'expo-router';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import BurgerMenuButton from '../components/ui/BurgerMenuButton';
 import Header from '../components/ui/Header';
 import HomeTileButton from '../components/ui/HomeTileButton';
 import Colors from "../utils/colors";
 
 export default function QuizChoice() {
+    const router = useRouter();
+
+    const handleSelectCategory = (category) => {
+        if (category === "mixed") {
+            router.push("/continentsChoiceQuiz")
+        } else {
+            router.push({
+                pathname: "/quiz",
+                params: { category },
+            });
+        }
+    };
+
     return <View style={styles.container}>
 
         <View style={styles.burgerArea}>
@@ -21,6 +34,7 @@ export default function QuizChoice() {
                     imageSource={require('../assets/images/img_flags.png')}
                     showProgress={true}
                     progress={0.3}
+                    onPress={() => handleSelectCategory("flags")}
                 />
                 <HomeTileButton
                     title="Maps"
@@ -33,12 +47,14 @@ export default function QuizChoice() {
                     imageSource={require('../assets/images/img_capitals.png')}
                     showProgress={true}
                     progress={1}
+                    onPress={() => handleSelectCategory("capitals")}
                 />
                 <HomeTileButton
                     title="Mixed"
                     imageSource={require('../assets/images/img_mixed.png')}
                     showProgress={true}
                     progress={0.7}
+                    onPress={() => handleSelectCategory("mixed")}
                 />
             </View>
         </ScrollView>

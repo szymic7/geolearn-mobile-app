@@ -1,11 +1,10 @@
-import {Pressable, StyleSheet, Text, View} from "react-native";
-import Colors from "../utils/colors";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import BurgerMenuButton from "../components/ui/BurgerMenuButton";
-import React from "react";
-import { useLocalSearchParams } from "expo-router";
+import Colors from "../utils/colors";
 
-export default function Result({onPress}) {
-
+export default function Result() {
+    const router = useRouter();
     const { correctAnswers, numOfQuestions } = useLocalSearchParams();
 
     const correct = Number(correctAnswers) || 0;
@@ -29,7 +28,10 @@ export default function Result({onPress}) {
                     Correct answers: <Text style={{fontWeight: 'bold'}}>{correct}/{total}</Text>
                 </Text>
                 <View style={styles.buttonContainer}>
-                    <Pressable style={styles.back}>
+                    <Pressable 
+                        style={styles.back}
+                        onPress={() => router.push("/")}
+                    >
                         <Text style={styles.buttonText}>Back to home</Text>
                     </Pressable>
                 </View>
