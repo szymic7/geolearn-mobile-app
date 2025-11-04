@@ -79,10 +79,8 @@ export default function Quiz() {
 
                 if (!response.ok) {
                     console.error("Failed to save result:", response.status);
-                } else {
-                    console.log("✅ Quiz result saved successfully");
                 }
-
+                
             } catch (error) {
                 console.error("Error saving result:", error);
             }
