@@ -1,4 +1,4 @@
-import React from "react";
+import { useRouter } from "expo-router";
 import { ScrollView, StyleSheet, View } from "react-native";
 import ScreenLayout from "../../components/layout/ScreenLayout";
 import BurgerMenuButton from "../../components/ui/BurgerMenuButton";
@@ -7,6 +7,8 @@ import HomeTileButton from "../../components/ui/HomeTileButton";
 import Colors from "../../utils/colors";
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <ScreenLayout>
       <View style={styles.container}>
@@ -21,6 +23,7 @@ export default function Home() {
             <HomeTileButton
               title="Flags"
               imageSource={require("../../assets/images/img_flags.png")}
+              onPress={() => router.push("/flagsRegionChoice")}
             />
             <HomeTileButton
               title="Maps"
@@ -29,10 +32,12 @@ export default function Home() {
             <HomeTileButton
               title="Capitals"
               imageSource={require("../../assets/images/img_capitals.png")}
+              onPress={() => router.push("/capitalsRegionChoice")}
             />
             <HomeTileButton
               title="Try yourself in quizzes"
               imageSource={require("../../assets/images/img_quizzes.png")}
+              onPress={() => router.push("/quizCategoryChoice")}
             />
           </View>
         </ScrollView>
