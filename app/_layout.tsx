@@ -6,13 +6,14 @@ export default function RootLayout() {
     <AuthProvider>
       <Stack
         screenOptions={{
-          headerStyle: {
-            backgroundColor: "#3ABB51",
-          },
-          headerTintColor: "#fff",
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
+          // headerStyle: {
+          //   backgroundColor: "#3ABB51",
+          // },
+          // headerTintColor: "#fff",
+          // headerTitleStyle: {
+          //   fontWeight: "bold",
+          // },
+          headerShown: false,
         }}
       >
         <Stack.Screen name="index" />
