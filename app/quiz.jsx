@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.background,
         alignItems: "center",
-        gap: 60,
+        gap: 30,
     },
 
     burgerArea: {
@@ -195,24 +195,26 @@ const styles = StyleSheet.create({
     },
 
     topSection: {
-        width: 360,
+        width: '90%',
+        height: 'auto',
         flexDirection: "column",
-        gap: 55,
+        gap: 80,
     },
 
     additions: {
         width: '100%',
-        height: 100,
+        height: 120,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'flex-end',
     },
 
     questionContainer: {
-        width: 320,
-        height: "auto",
+        width: '90%',
+        minHeight: 100,
+        maxHeight: 100,
         alignSelf: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
     },
 
@@ -220,12 +222,12 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: "100%",
-        marginBottom: 120,
+        width: '100%',
+        marginBottom: 100,
     },
 
     answersContainer: {
-        width: 280,
+        width: '75%',
         height: "auto",
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -242,7 +244,7 @@ const styles = StyleSheet.create({
     },
 
     addText:{
-        fontSize: 13,
+        fontSize: 15,
         fontFamily: 'Montserrat-Regular',
     },
 
