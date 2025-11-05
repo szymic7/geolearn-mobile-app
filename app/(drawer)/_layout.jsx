@@ -57,6 +57,46 @@ export default function DrawerLayout() {
           ),
         }}
       />
+      <Drawer.Screen
+        name="leaderboards"
+        options={{
+          title: "Leaderboards",
+          drawerLabel: "Leaderboards",
+          drawerIcon: ({ color, size }) => (
+            <Icon source="podium" size={size} color={color}></Icon>
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="quiz"
+        options={{
+          drawerItemStyle: { display: "none" },
+        }}
+      />
+      <Drawer.Screen
+        name="capitals"
+        options={{
+          drawerItemStyle: { display: "none" },
+        }}
+      />
+      <Drawer.Screen
+        name="flags"
+        options={{
+          drawerItemStyle: { display: "none" },
+        }}
+      />
+      <Drawer.Screen
+        name="result"
+        options={{
+          drawerItemStyle: { display: "none" },
+        }}
+      />
+      <Drawer.Screen
+        name="quizRegionChoice"
+        options={{
+          drawerItemStyle: { display: "none" },
+        }}
+      />
     </Drawer>
   );
 }

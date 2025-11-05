@@ -1,6 +1,7 @@
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, ScrollView, StyleSheet, View } from "react-native";
+import ScreenLayout from "../../components/layout/ScreenLayout";
 import BurgerMenuButton from "../../components/ui/BurgerMenuButton";
 import Header from "../../components/ui/Header";
 import HomeTileButton from "../../components/ui/HomeTileButton";
@@ -62,39 +63,41 @@ export default function QuizCategoryChoice() {
   const mixedProgress = mixedTotal / 70;
 
   return (
-    <View style={styles.container}>
-      <View style={styles.burgerArea}>
-        <BurgerMenuButton />
-      </View>
-
-      <ScrollView contentContainerStyle={styles.mainContent}>
-        <Header title="Choose your quiz category" />
-
-        <View style={styles.tilesContainer}>
-          <HomeTileButton
-            title="Flags"
-            imageSource={require("../../assets/images/img_flags.png")}
-            showProgress={true}
-            progress={flagsProgress}
-            onPress={() => handleSelectCategory("flags")}
-          />
-          <HomeTileButton
-            title="Capitals"
-            imageSource={require("../../assets/images/img_capitals.png")}
-            showProgress={true}
-            progress={capitalsProgress}
-            onPress={() => handleSelectCategory("capitals")}
-          />
-          <HomeTileButton
-            title="Mixed"
-            imageSource={require("../../assets/images/img_mixed.png")}
-            showProgress={true}
-            progress={mixedProgress}
-            onPress={() => handleSelectCategory("mixed")}
-          />
+    <ScreenLayout style={{ backgroundColor: Colors.primaryLight }}>
+      <View style={styles.container}>
+        <View style={styles.burgerArea}>
+          <BurgerMenuButton />
         </View>
-      </ScrollView>
-    </View>
+
+        <ScrollView contentContainerStyle={styles.mainContent}>
+          <Header title="Choose your quiz category" />
+
+          <View style={styles.tilesContainer}>
+            <HomeTileButton
+              title="Flags"
+              imageSource={require("../../assets/images/img_flags.png")}
+              showProgress={true}
+              progress={flagsProgress}
+              onPress={() => handleSelectCategory("flags")}
+            />
+            <HomeTileButton
+              title="Capitals"
+              imageSource={require("../../assets/images/img_capitals.png")}
+              showProgress={true}
+              progress={capitalsProgress}
+              onPress={() => handleSelectCategory("capitals")}
+            />
+            <HomeTileButton
+              title="Mixed"
+              imageSource={require("../../assets/images/img_mixed.png")}
+              showProgress={true}
+              progress={mixedProgress}
+              onPress={() => handleSelectCategory("mixed")}
+            />
+          </View>
+        </ScrollView>
+      </View>
+    </ScreenLayout>
   );
 }
 

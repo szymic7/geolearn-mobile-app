@@ -30,6 +30,7 @@ export default function Index() {
       <Link href="/flagsRegionChoice">Learn flags</Link>
       <Link href="/capitalsRegionChoice">Learn capitals</Link>
       <Link href="/quizCategoryChoice">Quizzes</Link>
+      <Link href="/leaderboards">Leaderboards</Link>
     </View>
   );
 

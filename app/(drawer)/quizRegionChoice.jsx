@@ -1,9 +1,9 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import BurgerMenuButton from '../components/ui/BurgerMenuButton';
-import ContinentsTileButton from "../components/ui/ContinentsTileButton";
-import Header from '../components/ui/Header';
-import Colors from "../utils/colors";
+import BurgerMenuButton from '../../components/ui/BurgerMenuButton';
+import ContinentsTileButton from "../../components/ui/ContinentsTileButton";
+import Header from '../../components/ui/Header';
+import Colors from "../../utils/colors";
 
 export default function QuizRegionChoice() {
     const router = useRouter();

@@ -4,13 +4,12 @@ import { useEffect, useState } from "react";
 import {
   ImageBackground,
   Keyboard,
-  KeyboardAvoidingView,
-  Platform,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TextInput } from "react-native-paper";
 import CustomBtn from "../components/ui/CustomBtn";
 import { useAuth } from "../contexts/authContext";
@@ -61,73 +60,69 @@ export default function Login() {
         source={require("../assets/images/bg-login.png")}
         resizeMode="cover"
       >
-        <KeyboardAvoidingView
-          style={styles.container}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          keyboardVerticalOffset={60}
+        <KeyboardAwareScrollView
+          contentContainerStyle={styles.scrollContainer}
+          enableOnAndroid={true}
+          extraScrollHeight={20}
+          keyboardShouldPersistTaps="handled"
         >
-          <View style={styles.center}>
+          <View style={styles.form}>
             <Text style={styles.header}>Welcome back to GeoLearn</Text>
-            <View style={styles.form}>
-              <View style={styles.row}>
-                <Text style={styles.label}>Email</Text>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={(text) => {
-                    setEmail(text);
-                    if (error.email)
-                      setError((e) => ({ ...e, email: undefined }));
-                  }}
-                  value={email}
-                  placeholder="Email"
-                  keyboardType="email-address"
-                  right={<TextInput.Icon icon="email" />}
-                  mode="outlined"
-                />
-                {error.email && <Text style={styles.error}>{error.email}</Text>}
-              </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Password</Text>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={(text) => {
-                    setPassword(text);
-                    if (error.password)
-                      setError((e) => ({ ...e, password: undefined }));
-                  }}
-                  value={password}
-                  placeholder="Password"
-                  secureTextEntry={true}
-                  right={<TextInput.Icon icon="lock" />}
-                  mode="outlined"
-                />
-
-                {error.password && (
-                  <Text style={styles.error}>{error.password}</Text>
-                )}
-              </View>
-              <CustomBtn type="green" onPress={handleSubmit} disabled={loading}>
-                {loading ? "Loading..." : "Login"}
-              </CustomBtn>
-              {authError && <Text style={styles.error}>{authError}</Text>}
-              <Text>
-                New in GeoLearn?{" "}
-                <Link screen="register" style={styles.link}>
-                  Sign up{" "}
-                </Link>
-              </Text>
+            <View style={styles.row}>
+              <Text style={styles.label}>Email</Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => {
+                  setEmail(text);
+                  if (error.email)
+                    setError((e) => ({ ...e, email: undefined }));
+                }}
+                value={email}
+                placeholder="Email"
+                keyboardType="email-address"
+                right={<TextInput.Icon icon="email" />}
+                mode="outlined"
+              />
+              {error.email && <Text style={styles.error}>{error.email}</Text>}
             </View>
+            <View style={styles.row}>
+              <Text style={styles.label}>Password</Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => {
+                  setPassword(text);
+                  if (error.password)
+                    setError((e) => ({ ...e, password: undefined }));
+                }}
+                value={password}
+                placeholder="Password"
+                secureTextEntry={true}
+                right={<TextInput.Icon icon="lock" />}
+                mode="outlined"
+              />
+
+              {error.password && (
+                <Text style={styles.error}>{error.password}</Text>
+              )}
+            </View>
+            <CustomBtn type="green" onPress={handleSubmit} disabled={loading}>
+              {loading ? "Loading..." : "Login"}
+            </CustomBtn>
+            {authError && <Text style={styles.error}>{authError}</Text>}
+            <Text>
+              New in GeoLearn?{" "}
+              <Link screen="register" style={styles.link}>
+                Sign up{" "}
+              </Link>
+            </Text>
           </View>
-        </KeyboardAvoidingView>
+        </KeyboardAwareScrollView>
       </ImageBackground>
     </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   img: {
     width: "100%",
     height: "100%",
@@ -137,6 +132,12 @@ const styles = StyleSheet.create({
     fontSize: 32,
     textAlign: "center",
   },
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 24,
+  },
   input: {
     width: 280,
     height: 50,
@@ -144,13 +145,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background,
     borderRadius: 11,
     maxLength: 80,
-  },
-  center: {
-    flex: 1,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 32,
   },
   form: {
     flexDirection: "column",
@@ -162,9 +156,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 500,
     marginLeft: -10,
-  },
-  alignRight: {
-    textAlign: "right",
   },
   link: {
     textDecorationLine: "underline",

@@ -5,26 +5,36 @@ import {
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Icon } from "react-native-paper";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "../../contexts/authContext";
 import Colors from "../../utils/colors";
+import LogoutButton from "./LogoutButton";
 
 export default function DrawerHeader(props) {
   const { user } = useAuth();
+  const insets = useSafeAreaInsets();
 
   return (
-    <DrawerContentScrollView {...props} contentContainerStyle={{ flex: 1 }}>
-      <View style={styles.header}>
-        <View style={styles.icon}>
-          <Icon source="account" size={32} color={Colors.textPrimary}></Icon>
+    <View style={{ flex: 1 }}>
+      <DrawerContentScrollView {...props} contentContainerStyle={{ flex: 1 }}>
+        <View style={styles.header}>
+          <View style={styles.icon}>
+            <Icon source="account" size={32} color={Colors.textPrimary}></Icon>
+          </View>
+          <View style={styles.column}>
+            <Text style={styles.name}>{user?.username || "Guest"}</Text>
+            <Text style={styles.email}>
+              {user?.email || "guest@example.com"}
+            </Text>
+          </View>
         </View>
-        <View style={styles.column}>
-          <Text style={styles.name}>{user?.username || "Guest"}</Text>
-          <Text style={styles.email}>{user?.email || "guest@example.com"}</Text>
-        </View>
-      </View>
 
-      <DrawerItemList {...props} />
-    </DrawerContentScrollView>
+        <DrawerItemList {...props} />
+      </DrawerContentScrollView>
+      <View style={{ paddingBottom: insets.bottom + 10 }}>
+        <LogoutButton></LogoutButton>
+      </View>
+    </View>
   );
 }
 
