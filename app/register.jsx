@@ -1,16 +1,8 @@
 import { Link } from "@react-navigation/native";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
-import {
-  Alert,
-  ImageBackground,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Alert, ImageBackground, StyleSheet, Text, View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TextInput } from "react-native-paper";
 import CustomBtn from "../components/ui/CustomBtn";
 import { useAuth } from "../contexts/authContext";
@@ -25,8 +17,6 @@ export default function Register() {
 
   const { register, loading, authError, clearError } = useAuth();
 
-  // TODO: email with uppercase is different than in lowercase.
-  //  It should be equal. Add somewhere lowercase() function. Discuss adding it in backend
   function validate() {
     const newErrors = {};
     if (!name.trim()) newErrors.name = "Name is required";
@@ -50,7 +40,6 @@ export default function Register() {
     const ok = validate();
     if (ok) {
       const success = await register({ name, email, password });
-
       if (success) {
         Alert.alert(
           "Success",
@@ -61,13 +50,9 @@ export default function Register() {
     }
   }
 
-  //TODO: fix clear authError when user starts typing new data in TextInput
-  useEffect(
-    function () {
-      clearError();
-    },
-    [clearError]
-  );
+  useEffect(() => {
+    clearError();
+  }, [clearError]);
 
   return (
     <ImageBackground
@@ -75,103 +60,106 @@ export default function Register() {
       source={require("../assets/images/bg-login.png")}
       resizeMode="cover"
     >
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={60}
-        style={styles.container}
+      <KeyboardAwareScrollView
+        contentContainerStyle={styles.scrollContainer}
+        enableOnAndroid={true}
+        extraScrollHeight={20}
+        keyboardShouldPersistTaps="handled"
       >
-        <ScrollView
-          contentContainerStyle={styles.scrollContainer}
-          keyboardShouldPersistTaps="handled"
-        >
-          <View style={styles.form}>
-            <Text style={styles.header}>
-              Join GeoLearn and start your journey
-            </Text>
-            <View style={styles.row}>
-              <Text style={styles.label}>Name</Text>
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => {
-                  setName(text);
-                  if (error.name) setError((e) => ({ ...e, name: undefined }));
-                }}
-                value={name}
-                placeholder="Mateusz"
-                keyboardType="text"
-                right={<TextInput.Icon icon="account" />}
-                mode="outlined"
-              />
-              {error.name && <Text style={styles.error}>{error.name}</Text>}
-            </View>
-            <View style={styles.row}>
-              <Text style={styles.label}>Email</Text>
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => {
-                  setEmail(text);
-                  if (error.email)
-                    setError((e) => ({ ...e, email: undefined }));
-                }}
-                value={email}
-                placeholder="bleksy@gmail.com"
-                keyboardType="email-address"
-                right={<TextInput.Icon icon="email" />}
-                mode="outlined"
-              />
-              {error.email && <Text style={styles.error}>{error.email}</Text>}
-            </View>
-            <View style={styles.row}>
-              <Text style={styles.label}>Password</Text>
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => {
-                  setPassword(text);
-                  if (error.password)
-                    setError((e) => ({ ...e, password: undefined }));
-                }}
-                value={password}
-                placeholder="Password"
-                secureTextEntry={true}
-                right={<TextInput.Icon icon="lock" />}
-                mode="outlined"
-              />
-              {error.password && (
-                <Text style={styles.error}>{error.password}</Text>
-              )}
-            </View>
-            <View style={styles.row}>
-              <Text style={styles.label}>Repeat Password</Text>
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => setRepeatPassword(text)}
-                value={repeatPassword}
-                placeholder="Password"
-                secureTextEntry={true}
-                right={<TextInput.Icon icon="lock" />}
-                mode="outlined"
-              />
-            </View>
-            <CustomBtn type="green" onPress={handleSubmit} disabled={loading}>
-              {loading ? "Loading..." : "Sign up"}
-            </CustomBtn>
-            {authError && <Text style={styles.error}>{authError}</Text>}
-            <Text>
-              Have already account?{" "}
-              <Link screen="login" style={styles.link}>
-                Login
-              </Link>
-            </Text>
+        <View style={styles.form}>
+          <Text style={styles.header}>
+            Join GeoLearn and start your journey
+          </Text>
+
+          <View style={styles.row}>
+            <Text style={styles.label}>Name</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={(text) => {
+                setName(text);
+                if (error.name) setError((e) => ({ ...e, name: undefined }));
+              }}
+              value={name}
+              placeholder="Mateusz"
+              keyboardType="text"
+              right={<TextInput.Icon icon="account" />}
+              mode="outlined"
+            />
+            {error.name && <Text style={styles.error}>{error.name}</Text>}
           </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+
+          <View style={styles.row}>
+            <Text style={styles.label}>Email</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={(text) => {
+                setEmail(text);
+                if (error.email) setError((e) => ({ ...e, email: undefined }));
+              }}
+              value={email}
+              placeholder="bleksy@gmail.com"
+              keyboardType="email-address"
+              right={<TextInput.Icon icon="email" />}
+              mode="outlined"
+            />
+            {error.email && <Text style={styles.error}>{error.email}</Text>}
+          </View>
+
+          <View style={styles.row}>
+            <Text style={styles.label}>Password</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={(text) => {
+                setPassword(text);
+                if (error.password)
+                  setError((e) => ({ ...e, password: undefined }));
+              }}
+              value={password}
+              placeholder="Password"
+              secureTextEntry={true}
+              right={<TextInput.Icon icon="lock" />}
+              mode="outlined"
+            />
+            {error.password && (
+              <Text style={styles.error}>{error.password}</Text>
+            )}
+          </View>
+
+          <View style={styles.row}>
+            <Text style={styles.label}>Repeat Password</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setRepeatPassword}
+              value={repeatPassword}
+              placeholder="Password"
+              secureTextEntry={true}
+              right={<TextInput.Icon icon="lock" />}
+              mode="outlined"
+            />
+          </View>
+
+          <CustomBtn type="green" onPress={handleSubmit} disabled={loading}>
+            {loading ? "Loading..." : "Sign up"}
+          </CustomBtn>
+
+          {authError && <Text style={styles.error}>{authError}</Text>}
+
+          <Text>
+            Have already account?{" "}
+            <Link screen="login" style={styles.link}>
+              Login
+            </Link>
+          </Text>
+        </View>
+      </KeyboardAwareScrollView>
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  img: {
+    width: "100%",
+    height: "100%",
   },
   scrollContainer: {
     flexGrow: 1,
@@ -179,24 +167,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 24,
   },
-  img: {
-    width: "100%",
-    height: "100%",
-  },
   header: {
     color: Colors.textPrimary,
     fontSize: 32,
     textAlign: "center",
   },
-  input: {
-    width: 280,
-    height: 50,
-    borderColor: Colors.border,
-    backgroundColor: Colors.background,
-    borderRadius: 11,
-    maxLength: 80,
-  },
-
   form: {
     flexDirection: "column",
     alignItems: "center",
@@ -205,11 +180,15 @@ const styles = StyleSheet.create({
   label: {
     color: Colors.textPrimary,
     fontSize: 18,
-    fontWeight: 500,
+    fontWeight: "500",
     marginLeft: -10,
   },
-  alignRight: {
-    textAlign: "right",
+  input: {
+    width: 280,
+    height: 50,
+    borderColor: Colors.border,
+    backgroundColor: Colors.background,
+    borderRadius: 11,
   },
   link: {
     color: Colors.textPrimary,
