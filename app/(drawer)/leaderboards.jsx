@@ -46,7 +46,7 @@ export default function Leaderboards() {
   }, []);
 
   return (
-    <ScreenLayout>
+    <ScreenLayout style={{ backgroundColor: Colors.primaryLight }}>
       <View style={styles.container}>
         <View style={styles.mainContent}>
           <View style={styles.actions}>

@@ -50,7 +50,7 @@ export default function Capitals() {
   }, []);
 
   return (
-    <ScreenLayout>
+    <ScreenLayout style={{ backgroundColor: Colors.primaryLight }}>
       {!loading ? (
         <View style={styles.container}>
           <View style={styles.burgerArea}>

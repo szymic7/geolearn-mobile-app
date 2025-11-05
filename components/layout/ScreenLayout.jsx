@@ -12,7 +12,6 @@ export default function ScreenLayout({ style, children }) {
           flex: 1,
           paddingTop: insets.top,
           paddingBottom: insets.bottom,
-          backgroundColor: Colors.primaryLight,
         },
         style,
       ]}

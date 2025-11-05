@@ -12,7 +12,7 @@ export default function Result() {
   const total = Number(numOfQuestions) || 1;
 
   return (
-    <ScreenLayout>
+    <ScreenLayout style={{ backgroundColor: Colors.background }}>
       <View style={styles.container}>
         <View style={styles.burgerArea}>
           <BurgerMenuButton />

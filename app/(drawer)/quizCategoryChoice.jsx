@@ -21,7 +21,7 @@ export default function QuizCategoryChoice() {
   };
 
   return (
-    <ScreenLayout>
+    <ScreenLayout style={{ backgroundColor: Colors.primaryLight }}>
       <View style={styles.container}>
         <View style={styles.burgerArea}>
           <BurgerMenuButton />
