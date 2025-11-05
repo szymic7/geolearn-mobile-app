@@ -36,49 +36,49 @@ export default function QuizRegionChoice() {
             <View style={styles.tilesContainer}>
                 <ContinentsTileButton
                     title="Europe"
-                    imageSource={require('../assets/images/Europe_cc.png')}
+                    imageSource={require('../../assets/images/Europe_cc.png')}
                     showProgress={true}
                     progress={normalize_score(scores.europe)}
                     onPress={() => handleSelectRegion("europe")}
                 />
                 <ContinentsTileButton
                     title="Asia"
-                    imageSource={require('../assets/images/Asia_cc.png')}
+                    imageSource={require('../../assets/images/Asia_cc.png')}
                     showProgress={true}
                     progress={normalize_score(scores.asia)}
                     onPress={() => handleSelectRegion("asia")}
                 />
                 <ContinentsTileButton
                     title="Africa"
-                    imageSource={require('../assets/images/Africa_cc.png')}
+                    imageSource={require('../../assets/images/Africa_cc.png')}
                     showProgress={true}
                     progress={normalize_score(scores.africa)}
                     onPress={() => handleSelectRegion("africa")}
                 />
                 <ContinentsTileButton
                     title="North America"
-                    imageSource={require('../assets/images/NorthAmerica_cc.png')}
+                    imageSource={require('../../assets/images/NorthAmerica_cc.png')}
                     showProgress={true}
                     progress={normalize_score(scores.north_america)}
                     onPress={() => handleSelectRegion("north_america")}
                 />
                 <ContinentsTileButton
                     title="South America"
-                    imageSource={require('../assets/images/SouthAmerica_cc.png')}
+                    imageSource={require('../../assets/images/SouthAmerica_cc.png')}
                     showProgress={true}
                     progress={normalize_score(scores.south_america)}
                     onPress={() => handleSelectRegion("south_america")}
                 />
                 <ContinentsTileButton
                     title="Australia"
-                    imageSource={require('../assets/images/Australia_cc.png')}
+                    imageSource={require('../../assets/images/Australia_cc.png')}
                     showProgress={true}
                     progress={normalize_score(scores.australia)}
                     onPress={() => handleSelectRegion("australia")}
                 />
                 <ContinentsTileButton
                     title="World"
-                    imageSource={require('../assets/images/World_cc.png')}
+                    imageSource={require('../../assets/images/World_cc.png')}
                     showProgress={true}
                     progress={normalize_score(scores.world)}
                     onPress={() => handleSelectRegion("world")}

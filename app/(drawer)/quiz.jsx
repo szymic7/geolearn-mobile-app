@@ -1,6 +1,7 @@
+import { useFocusEffect } from "@react-navigation/native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import ScreenLayout from "../../components/layout/ScreenLayout";
 import BurgerMenuButton from "../../components/ui/BurgerMenuButton";
@@ -23,20 +24,38 @@ export default function Quiz() {
   const [error, setError] = useState(null);
   const router = useRouter();
 
-  useEffect(() => {
-    const loadQuestions = async () => {
-      try {
-        const data = await fetchAllQuestions(category);
-        setQuestions(data);
-      } catch (err) {
-        setError("Failed to load quiz questions. Please try again later.");
-      } finally {
-        setLoading(false);
-      }
-    };
+  useFocusEffect(
+    useCallback(() => {
+      let isActive = true;
 
-    loadQuestions();
-  }, []);
+      const loadQuestions = async () => {
+        try {
+          setLoading(true);
+          setQuestions([]);
+          setCurrentIndex(0);
+          setSelected(-1);
+          setSubmitted(false);
+          setCorrectCount(0);
+          setError(null);
+
+          const data = await fetchAllQuestions(category);
+          if (isActive) {
+            setQuestions(data);
+          }
+        } catch (err) {
+          setError("Failed to load quiz questions. Please try again later.");
+        } finally {
+          if (isActive) setLoading(false);
+        }
+      };
+
+      loadQuestions();
+
+      return () => {
+        isActive = false;
+      };
+    }, [category])
+  );
 
   const handleSubmit = () => {
     if (selected !== -1) {

@@ -38,6 +38,7 @@ export default function Home() {
             <HomeTileButton
               title="Check Leaderboards"
               imageSource={require("../../assets/images/img_trophy.jpg")}
+              onPress={() => router.push("/leaderboards")}
             />
           </View>
         </ScrollView>
