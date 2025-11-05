@@ -91,6 +91,12 @@ export default function DrawerLayout() {
           drawerItemStyle: { display: "none" },
         }}
       />
+      <Drawer.Screen
+        name="quizRegionChoice"
+        options={{
+          drawerItemStyle: { display: "none" },
+        }}
+      />
     </Drawer>
   );
 }
