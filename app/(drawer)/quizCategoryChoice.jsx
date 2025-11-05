@@ -1,16 +1,38 @@
 import { useRouter } from "expo-router";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, ScrollView, StyleSheet, View } from "react-native";
 import BurgerMenuButton from "../../components/ui/BurgerMenuButton";
 import Header from "../../components/ui/Header";
 import HomeTileButton from "../../components/ui/HomeTileButton";
+import { fetchUserBestScores } from "../../services/quizService";
 import Colors from "../../utils/colors";
 
 export default function QuizCategoryChoice() {
   const router = useRouter();
+  const [scores, setScores] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadScores = async () => {
+      try {
+        const data = await fetchUserBestScores();
+        setScores(data);
+      } catch (error) {
+        console.error("❌ Failed to fetch user scores:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadScores();
+  }, []);
 
   const handleSelectCategory = (category) => {
     if (category === "mixed") {
-      router.push("/quizRegionChoice");
+      router.push({
+        pathname: "/quizRegionChoice",
+        params: { ...scores?.mixed },
+      });
     } else {
       router.push({
         pathname: "/quiz",
@@ -18,6 +40,26 @@ export default function QuizCategoryChoice() {
       });
     }
   };
+
+  if (loading) {
+    return (
+      <View style={[styles.container, { justifyContent: "center" }]}>
+        <ActivityIndicator size="large" color={Colors.primaryDark} />
+      </View>
+    );
+  }
+
+  const flagsScore = scores?.flags ?? 0;
+  const capitalsScore = scores?.capitals ?? 0;
+  const mixedScores = scores?.mixed ?? {};
+
+  // Compute progress values (normalized to 0–1 range)
+  const flagsProgress = flagsScore / 30;
+  const capitalsProgress = capitalsScore / 30;
+
+  // Sum all subcategory scores in 'mixed'
+  const mixedTotal = Object.values(mixedScores).reduce((a, b) => a + b, 0);
+  const mixedProgress = mixedTotal / 70;
 
   return (
     <View style={styles.container}>
@@ -33,7 +75,7 @@ export default function QuizCategoryChoice() {
             title="Flags"
             imageSource={require("../../assets/images/img_flags.png")}
             showProgress={true}
-            progress={0.3}
+            progress={flagsProgress}
             onPress={() => handleSelectCategory("flags")}
           />
           <HomeTileButton
@@ -46,14 +88,14 @@ export default function QuizCategoryChoice() {
             title="Capitals"
             imageSource={require("../../assets/images/img_capitals.png")}
             showProgress={true}
-            progress={1}
+            progress={capitalsProgress}
             onPress={() => handleSelectCategory("capitals")}
           />
           <HomeTileButton
             title="Mixed"
             imageSource={require("../../assets/images/img_mixed.png")}
             showProgress={true}
-            progress={0.7}
+            progress={mixedProgress}
             onPress={() => handleSelectCategory("mixed")}
           />
         </View>

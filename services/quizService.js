@@ -1,3 +1,5 @@
+import * as SecureStore from "expo-secure-store";
+import { QUIZ_ENDPOINTS } from "../constants/api";
 import TRIVIA_API_BASE from "../constants/trivia-api";
 
 const difficulties = ["easy", "medium", "hard"];
@@ -13,6 +15,56 @@ const LIMITS_MAP = {
   australia: [3, 4, 3],
   world: [3, 4, 3],
 };
+
+/**
+ * Fetches logged in user's best scores in each quiz category.
+ * Requires a valid auth token stored in SecureStore.
+ * @returns {Promise<Object>} A map of categories -> best score
+ */
+export async function fetchUserBestScores() {
+  try {
+    const token = await SecureStore.getItemAsync("token");
+    if (!token) {
+      console.warn("⚠️ No auth token found — user may not be logged in.");
+      return {};
+    }
+
+    const res = await fetch(QUIZ_ENDPOINTS.MY_BEST, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) {
+      console.warn(`⚠️ Request failed: ${res.status}`);
+      return {};
+    }
+
+    const json = await res.json();
+
+    const results = {};
+
+    // Flags (world only)
+    const flagsWorld = json.flags?.find((item) => item.subcategory === "world");
+    results.flags = flagsWorld ? flagsWorld.score : 0;
+
+    // Capitals (world only)
+    const capitalsWorld = json.capitals?.find((item) => item.subcategory === "world");
+    results.capitals = capitalsWorld ? capitalsWorld.score : 0;
+
+    // Mixed (all subcategories)
+    results.mixed = (json.mixed || []).reduce((acc, item) => {
+      acc[item.subcategory] = item.score;
+      return acc;
+    }, {});
+
+    return results;
+  } catch (error) {
+    console.error("❌ Error retrieving user best scores:", error);
+    return {};
+  }
+}
 
 /**
  * Fetches quiz questions of all difficulty levels, formats, and merges them.
