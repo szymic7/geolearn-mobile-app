@@ -1,10 +1,14 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Animated, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '../../utils/colors';
 
 export default function FlagsViewer({ countries }) {
   const [index, setIndex] = useState(0);
   const fadeAnim = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    setIndex(0);
+  }, [countries]);
 
   const nextFlag = () => {
     Animated.timing(fadeAnim, {

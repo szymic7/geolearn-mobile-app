@@ -8,8 +8,13 @@ export default function CapitalsViewer({ countries }) {
   const [loading, setLoading] = useState(false);
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
-  const country = countries[index];
-  const iso2 = country.iso_a2.toLowerCase();
+  const country = countries[index] ?? {};
+  const iso2 = country?.iso_a2.toLowerCase?.() ?? "";
+
+  useEffect(() => {
+    setIndex(0);
+    setCapitalImage(null);
+  }, [countries]);
 
   const fetchCapitalImage = async (capital) => {
     setLoading(true);
@@ -35,7 +40,6 @@ export default function CapitalsViewer({ countries }) {
         const summaryRes = await fetch(summaryUrl);
         const summaryData = await summaryRes.json();
         imageSrc = summaryData?.thumbnail?.source || null;
-        // setCapitalImage(summaryData?.thumbnail?.source || null);
       }
 
       setCapitalImage(imageSrc);

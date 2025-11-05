@@ -1,5 +1,6 @@
+import { useFocusEffect } from "@react-navigation/native";
 import { useLocalSearchParams } from "expo-router";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { ActivityIndicator, Alert, StyleSheet, Text, View } from "react-native";
 import ScreenLayout from "../../components/layout/ScreenLayout";
 import BurgerMenuButton from "../../components/ui/BurgerMenuButton";
@@ -22,32 +23,36 @@ export default function Capitals() {
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchCountries = async () => {
-      try {
-        const url =
-          REGION_TO_URL_MAP[region] || CAPITALS_ENDPOINTS.ALL_CAPITALS;
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+  useFocusEffect(
+    useCallback(() => {
+      const fetchCountries = async () => {
+        try {
+          setLoading(true);
+          setCountries([]);
+
+          const url = REGION_TO_URL_MAP[region] || CAPITALS_ENDPOINTS.ALL_CAPITALS;
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          const sortedData = [...data].sort((a, b) =>
+            a.name.localeCompare(b.name)
+          );
+
+          setCountries(sortedData);
+        } catch (error) {
+          console.error("Failed to fetch countries:", error);
+          Alert.alert("Error", "Failed to load data. Please try again later.");
+        } finally {
+          setLoading(false);
         }
+      };
 
-        const data = await response.json();
-        const sortedData = [...data].sort((a, b) =>
-          a.name.localeCompare(b.name)
-        );
-
-        setCountries(sortedData);
-      } catch (error) {
-        console.error("Failed to fetch countries:", error);
-        Alert.alert("Error", "Failed to load data. Please try again later.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCountries();
-  }, []);
+      fetchCountries();
+    }, [region])
+  );
 
   return (
     <ScreenLayout style={{ backgroundColor: Colors.primaryLight }}>
