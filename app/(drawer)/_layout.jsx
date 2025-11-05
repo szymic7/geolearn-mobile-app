@@ -57,30 +57,6 @@ export default function DrawerLayout() {
           ),
         }}
       />
-      <Drawer.Screen
-        name="quiz"
-        options={{
-          drawerItemStyle: { display: "none" },
-        }}
-      />
-      <Drawer.Screen
-        name="capitals"
-        options={{
-          drawerItemStyle: { display: "none" },
-        }}
-      />
-      <Drawer.Screen
-        name="flags"
-        options={{
-          drawerItemStyle: { display: "none" },
-        }}
-      />
-      <Drawer.Screen
-        name="result"
-        options={{
-          drawerItemStyle: { display: "none" },
-        }}
-      />
     </Drawer>
   );
 }

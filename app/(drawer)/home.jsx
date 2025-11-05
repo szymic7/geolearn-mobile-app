@@ -62,16 +62,15 @@ const styles = StyleSheet.create({
 
   mainContent: {
     flex: 1,
-    width: 280,
+    width: "80%",
     height: "100%",
     justifyContent: "space-between",
-    marginVertical: "5%",
   },
 
   tilesContainer: {
-    width: "100%",
     flexDirection: "column",
     justifyContent: "space-around",
     flexGrow: 1,
+    paddingHorizontal: 5,
   },
 });

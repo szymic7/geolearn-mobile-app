@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
     width: 280,
     height: "100%",
     justifyContent: "space-between",
-    marginVertical: "5%",
   },
 
   tilesContainer: {
@@ -96,5 +95,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-around",
     flexGrow: 1,
+    paddingHorizontal: 5,
   },
 });
