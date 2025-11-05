@@ -41,13 +41,15 @@ export default function QuizButton({
 const styles = StyleSheet.create({
 
     quizButton: {
-        height: 58,
+        minHeight: 60,
         borderWidth: 2,
         borderRadius: 19,
         borderColor: Colors.textPrimary,
         width: "100%",
         alignItems: "center",
         justifyContent: "center",
+        paddingVertical: 8,
+        paddingHorizontal: 16,
     },
 
     selectedButton: {
@@ -55,8 +57,9 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        fontFamily: "Montserrat",
+        fontFamily: "Montserrat-Medium",
         color: Colors.textPrimary,
+        textAlign: "center"
     },
 
     correctText: {

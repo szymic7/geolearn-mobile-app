@@ -71,14 +71,12 @@ const styles = StyleSheet.create({
   },
   logoText: {
     color: Colors.textInverse,
-    fontFamily: "Montserrat",
-    fontWeight: "400",
+    fontFamily: "Montserrat-Regular",
     fontSize: 13,
   },
   actionsText: {
     color: Colors.textPrimary,
-    fontFamily: "Montserrat",
-    fontWeight: 700,
+    fontFamily: "Montserrat-SemiBold",
     fontSize: 14,
   },
   actions: {

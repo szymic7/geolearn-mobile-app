@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
 
   burgerArea: {
     position: "absolute",
-    top: 5,
+    top: 12,
     left: 13.5,
     zIndex: 10,
   },
@@ -88,7 +88,8 @@ const styles = StyleSheet.create({
     width: 280,
     height: "100%",
     justifyContent: "space-between",
-    marginVertical: "5%",
+    paddingTop: "4%",
+    paddingBottom: "11%",
   },
 
   tilesContainer: {
@@ -96,5 +97,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-around",
     flexGrow: 1,
+    paddingHorizontal: 5,
   },
 });

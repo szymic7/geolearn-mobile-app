@@ -3,8 +3,14 @@ import { useAuth } from "@/contexts/authContext";
 import { Link } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
 
+import { useFonts } from "expo-font";
+import { montserratFonts } from "@/utils/loadFonts";
+
 export default function Index() {
+
   const { logout } = useAuth();
+  const [fontsLoaded] = useFonts(montserratFonts);
+
   return (
     <View
       style={{

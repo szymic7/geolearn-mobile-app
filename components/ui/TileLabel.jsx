@@ -43,15 +43,14 @@ const styles = StyleSheet.create({
     text: {
         paddingVertical: 6,
         fontSize: 16,
-        fontFamily: 'Montserrat',
+        fontFamily: 'Montserrat-Medium',
         letterSpacing: 0.1,
-        fontWeight: '500',
         textAlign: 'center',
         color: Colors.textPrimary,
     },
 
     percent: {
-        fontWeight: '600',
+        fontFamily: 'Montserrat-SemiBold',
     },
 
 });

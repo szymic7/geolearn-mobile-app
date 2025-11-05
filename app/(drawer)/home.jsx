@@ -21,16 +21,12 @@ export default function Home() {
 
           <View style={styles.tilesContainer}>
             <HomeTileButton
-              title="Flags"
+              title="Learn Flags"
               imageSource={require("../../assets/images/img_flags.png")}
               onPress={() => router.push("/flagsRegionChoice")}
             />
             <HomeTileButton
-              title="Maps"
-              imageSource={require("../../assets/images/img_maps.png")}
-            />
-            <HomeTileButton
-              title="Capitals"
+              title="Learn Capitals"
               imageSource={require("../../assets/images/img_capitals.png")}
               onPress={() => router.push("/capitalsRegionChoice")}
             />
@@ -38,6 +34,10 @@ export default function Home() {
               title="Try yourself in quizzes"
               imageSource={require("../../assets/images/img_quizzes.png")}
               onPress={() => router.push("/quizCategoryChoice")}
+            />
+            <HomeTileButton
+              title="Check Leaderboards"
+              imageSource={require("../../assets/images/img_trophy.jpg")}
             />
           </View>
         </ScrollView>
@@ -62,16 +62,15 @@ const styles = StyleSheet.create({
 
   mainContent: {
     flex: 1,
-    width: 280,
+    width: "80%",
     height: "100%",
     justifyContent: "space-between",
-    marginVertical: "5%",
   },
 
   tilesContainer: {
-    width: "100%",
     flexDirection: "column",
     justifyContent: "space-around",
     flexGrow: 1,
+    paddingHorizontal: 5,
   },
 });
