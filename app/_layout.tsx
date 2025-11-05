@@ -8,12 +8,7 @@ export default function RootLayout() {
         screenOptions={{
           headerShown: false,
         }}
-      >
-        <Stack.Screen name="index" />
-        <Stack.Screen name="landing" />
-        <Stack.Screen name="login" />
-        <Stack.Screen name="register" />
-      </Stack>
+      ></Stack>
     </AuthProvider>
   );
 }
