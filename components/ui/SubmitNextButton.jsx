@@ -13,8 +13,8 @@ export default function SubmitNextButton({ submitted = false, onSubmit, onNext }
     };
 
     return (
-        <Pressable style={styles.button} onPress={handlePress}>
-            <Text style={styles.text}>
+        <Pressable style={[styles.button, submitted ? styles.submitted : null]} onPress={handlePress}>
+            <Text style={[styles.text, , submitted ? styles.textSubmitted : null]}>
                 {submitted ? "Next" : "Submit"}
             </Text>
         </Pressable>
@@ -34,9 +34,18 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.primaryLight,
     },
 
+    submitted:
+    {
+        backgroundColor: Colors.secondary,
+    },
+
     text: {
         fontFamily: 'Montserrat-Bold',
         fontSize: 15,
         color: Colors.background,
     },
+
+    textSubmitted: {
+        color: Colors.primaryLight,
+    }
 });

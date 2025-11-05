@@ -206,7 +206,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.background,
     alignItems: "center",
-    gap: 30,
   },
 
   burgerArea: {
@@ -218,23 +217,23 @@ const styles = StyleSheet.create({
 
   topSection: {
     width: "90%",
-    height: "auto",
+    flex: 1,
+    maxHeight: '40%',
     flexDirection: "column",
-    gap: 80,
+    gap: 60,
   },
 
   additions: {
     width: "100%",
-    height: 120,
+    height: '35%',
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-end",
   },
 
   questionContainer: {
+    flex: 1,
     width: "90%",
-    minHeight: 100,
-    maxHeight: 100,
     alignSelf: "center",
     justifyContent: "flex-start",
     alignItems: "center",
@@ -245,7 +244,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    marginBottom: 80,
+    minGap: 20,
+    marginBottom: 60,
   },
 
   answersContainer: {
