@@ -187,35 +187,37 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.background,
     alignItems: "center",
-    gap: 60,
+    gap: 30,
   },
 
   burgerArea: {
     position: "absolute",
-    top: 5,
+    top: 12,
     left: 13.5,
     zIndex: 10,
   },
 
   topSection: {
-    width: "100%",
+    width: "90%",
+    height: "auto",
     flexDirection: "column",
-    gap: 55,
+    gap: 80,
   },
 
   additions: {
-    height: 100,
+    width: "100%",
+    height: 120,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-end",
-    marginHorizontal: "10%",
   },
 
   questionContainer: {
-    width: 320,
-    height: "auto",
+    width: "90%",
+    minHeight: 100,
+    maxHeight: 100,
     alignSelf: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
   },
 
@@ -224,11 +226,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    marginBottom: 120,
+    marginBottom: 80,
   },
 
   answersContainer: {
-    width: 280,
+    width: "75%",
     height: "auto",
     flexDirection: "column",
     justifyContent: "space-between",
@@ -240,14 +242,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     width: "100%",
     fontSize: 18,
-    fontFamily: "Montserrat",
+    fontFamily: "Montserrat-Bold",
     letterSpacing: 0.2,
-    fontWeight: "700",
   },
 
   addText: {
-    fontSize: 13,
-    fontFamily: "Montserrat",
-    fontWeight: "500",
+    fontSize: 15,
+    fontFamily: "Montserrat-Regular",
   },
 });
