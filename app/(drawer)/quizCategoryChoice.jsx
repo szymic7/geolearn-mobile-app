@@ -37,12 +37,6 @@ export default function QuizCategoryChoice() {
             onPress={() => handleSelectCategory("flags")}
           />
           <HomeTileButton
-            title="Maps"
-            imageSource={require("../../assets/images/img_maps.png")}
-            showProgress={true}
-            progress={0.6}
-          />
-          <HomeTileButton
             title="Capitals"
             imageSource={require("../../assets/images/img_capitals.png")}
             showProgress={true}
