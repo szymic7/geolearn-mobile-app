@@ -1,4 +1,4 @@
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import BurgerMenuButton from '../components/ui/BurgerMenuButton';
 import ContinentsTileButton from "../components/ui/ContinentsTileButton";
@@ -7,6 +7,15 @@ import Colors from "../utils/colors";
 
 export default function QuizRegionChoice() {
     const router = useRouter();
+    const params = useLocalSearchParams();
+
+    // Normalize all scores to numbers
+    const scores = Object.entries(params).reduce((acc, [key, value]) => {
+        acc[key] = Number(value) || 0;
+        return acc;
+    }, {});
+
+    const normalize_score = (score) => score / 10;
     
     const handleSelectRegion = (category) => {
         router.push({
@@ -29,49 +38,49 @@ export default function QuizRegionChoice() {
                     title="Europe"
                     imageSource={require('../assets/images/Europe_cc.png')}
                     showProgress={true}
-                    progress={0.72}
+                    progress={normalize_score(scores.europe)}
                     onPress={() => handleSelectRegion("europe")}
                 />
                 <ContinentsTileButton
                     title="Asia"
                     imageSource={require('../assets/images/Asia_cc.png')}
                     showProgress={true}
-                    progress={0.56}
+                    progress={normalize_score(scores.asia)}
                     onPress={() => handleSelectRegion("asia")}
                 />
                 <ContinentsTileButton
                     title="Africa"
                     imageSource={require('../assets/images/Africa_cc.png')}
                     showProgress={true}
-                    progress={0.04}
+                    progress={normalize_score(scores.africa)}
                     onPress={() => handleSelectRegion("africa")}
                 />
                 <ContinentsTileButton
                     title="North America"
                     imageSource={require('../assets/images/NorthAmerica_cc.png')}
                     showProgress={true}
-                    progress={0.94}
+                    progress={normalize_score(scores.north_america)}
                     onPress={() => handleSelectRegion("north_america")}
                 />
                 <ContinentsTileButton
                     title="South America"
                     imageSource={require('../assets/images/SouthAmerica_cc.png')}
                     showProgress={true}
-                    progress={0.68}
+                    progress={normalize_score(scores.south_america)}
                     onPress={() => handleSelectRegion("south_america")}
                 />
                 <ContinentsTileButton
                     title="Australia"
                     imageSource={require('../assets/images/Australia_cc.png')}
                     showProgress={true}
-                    progress={0.1}
+                    progress={normalize_score(scores.australia)}
                     onPress={() => handleSelectRegion("australia")}
                 />
                 <ContinentsTileButton
                     title="World"
                     imageSource={require('../assets/images/World_cc.png')}
                     showProgress={true}
-                    progress={0.13}
+                    progress={normalize_score(scores.world)}
                     onPress={() => handleSelectRegion("world")}
                 />
             </View>
