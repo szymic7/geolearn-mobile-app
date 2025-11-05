@@ -41,8 +41,7 @@ const styles = StyleSheet.create({
 
 const textStyles = StyleSheet.create({
   text: {
-    fontWeight: 700,
-    fontFamily: "Montserrat",
+    fontFamily: "Montserrat-SemiBold",
     fontSize: 16,
   },
   green: {

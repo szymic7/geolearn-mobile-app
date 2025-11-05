@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     },
 
     font:{
-        fontFamily: "Montserrat",
+        fontFamily: "Montserrat-Regular",
         color: Colors.textPrimary,
     },
 

@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        fontFamily: "Montserrat",
+        fontFamily: "Montserrat-Regular",
         color: Colors.textPrimary,
     },
 

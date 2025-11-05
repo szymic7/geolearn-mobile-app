@@ -237,15 +237,13 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         width: '100%',
         fontSize: 18,
-        fontFamily: 'Montserrat',
+        fontFamily: 'Montserrat-Bold',
         letterSpacing: 0.2,
-        fontWeight: '700',
     },
 
     addText:{
         fontSize: 13,
-        fontFamily: 'Montserrat',
-        fontWeight: '500',
+        fontFamily: 'Montserrat-Regular',
     },
 
 });

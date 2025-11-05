@@ -19,9 +19,8 @@ const styles = StyleSheet.create({
 
     text: {
         fontSize: 24,
-        fontFamily: 'Montserrat',
+        fontFamily: 'Montserrat-Medium',
         letterSpacing: 0.5,
-        fontWeight: '500',
         textAlign: 'center',
         color: Colors.textPrimary,
     },

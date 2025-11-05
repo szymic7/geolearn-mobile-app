@@ -40,8 +40,7 @@ export default function Timer({ startSeconds = 30, onFinish, disabled = false })
 const styles = StyleSheet.create({
     timerText: {
         fontSize: 13,
-        fontFamily: "Montserrat",
-        fontWeight: "500",
+        fontFamily: "Montserrat-Regular",
         color: Colors.textPrimary,
     },
 });
