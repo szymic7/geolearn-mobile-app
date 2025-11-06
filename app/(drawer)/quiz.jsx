@@ -104,7 +104,6 @@ export default function Quiz() {
         if (!response.ok) {
           console.error("Failed to save result:", response.status);
         }
-        console.log(`Saved results ${category} / ${correctCount}`);
       } catch (error) {
         console.error("Error saving result:", error);
       }

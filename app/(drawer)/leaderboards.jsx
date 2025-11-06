@@ -39,7 +39,7 @@ export default function Leaderboards() {
           const data = await res.json();
           setScores(data);
         } catch (err) {
-          console.log(err.message);
+          console.error(err.message);
           setError(err.message);
         } finally {
           setLoading(false);

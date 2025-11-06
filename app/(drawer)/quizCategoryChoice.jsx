@@ -1,5 +1,6 @@
+import { useFocusEffect } from "@react-navigation/native";
 import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { ActivityIndicator, ScrollView, StyleSheet, View } from "react-native";
 import ScreenLayout from "../../components/layout/ScreenLayout";
 import BurgerMenuButton from "../../components/navigation/BurgerMenuButton";
@@ -13,20 +14,22 @@ export default function QuizCategoryChoice() {
   const [scores, setScores] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const loadScores = async () => {
-      try {
-        const data = await fetchUserBestScores();
-        setScores(data);
-      } catch (error) {
-        console.error("Failed to fetch user scores:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  useFocusEffect(
+    useCallback(() => {
+      const loadScores = async () => {
+        try {
+          const data = await fetchUserBestScores();
+          setScores(data);
+        } catch (error) {
+          console.error("Failed to fetch user scores:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
 
-    loadScores();
-  }, []);
+      loadScores();
+    }, [])
+  );
 
   const handleSelectCategory = (category) => {
     if (category === "mixed") {
