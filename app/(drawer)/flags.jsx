@@ -56,7 +56,7 @@ export default function Flags() {
       fetchCountries();
 
       return () => {
-          isActive = false;
+        isActive = false;
       };
     }, [region])
   );

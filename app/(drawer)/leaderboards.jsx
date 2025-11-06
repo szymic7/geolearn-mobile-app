@@ -8,6 +8,8 @@ import {
 } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import ScreenLayout from "../../components/layout/ScreenLayout";
+import BurgerMenuButton from "../../components/ui/BurgerMenuButton";
+import ThemedText from "../../components/ui/ThemedText";
 import Colors from "../../utils/colors";
 
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL;
@@ -48,6 +50,9 @@ export default function Leaderboards() {
   return (
     <ScreenLayout style={{ backgroundColor: Colors.primaryLight }}>
       <View style={styles.container}>
+        <View style={styles.burgerArea}>
+          <BurgerMenuButton />
+        </View>
         <View style={styles.mainContent}>
           <View style={styles.actions}>
             {["flags", "capitals", "mixed"].map((category) => (
@@ -76,7 +81,13 @@ export default function Leaderboards() {
                 <Text style={styles.errorText}>{error}</Text>
               </View>
             )}
-            <Text style={styles.leaderboardHeader}>{headerTitle}</Text>
+            <ThemedText
+              color={Colors.textInverse}
+              style={{ textAlign: "center", marginBottom: 12 }}
+              size={20}
+            >
+              {headerTitle}
+            </ThemedText>
             <FlatList
               data={scores[activeCategory] || []}
               renderItem={({ item, index }) => (
@@ -91,7 +102,13 @@ export default function Leaderboards() {
                 loading ? (
                   <ActivityIndicator size="large" color={Colors.primary} />
                 ) : (
-                  <Text style={styles.emptyText}>No scores yet</Text>
+                  <ThemedText
+                    size={20}
+                    color={Colors.textLight}
+                    style={styles.emptyText}
+                  >
+                    No scores yet
+                  </ThemedText>
                 )
               }
             />
@@ -104,8 +121,8 @@ export default function Leaderboards() {
 
 const Item = ({ name, number, points }) => (
   <View style={styles.item}>
-    <Text style={styles.title}>{`${number}. ${name}`}</Text>
-    <Text style={styles.title}>{`${points} pts`}</Text>
+    <ThemedText size={18}>{`${number}. ${name}`}</ThemedText>
+    <ThemedText size={18}>{`${points} pts`}</ThemedText>
   </View>
 );
 
@@ -114,6 +131,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.primaryLight,
     alignItems: "center",
+    justifyContent: "flex-end",
   },
 
   burgerArea: {
@@ -124,12 +142,14 @@ const styles = StyleSheet.create({
   },
 
   mainContent: {
-    flex: 1,
+    // flex: 1,
     width: "80%",
+    height: "90%",
     marginVertical: "5%",
-    backgroundColor: "#333",
+    backgroundColor: Colors.backgroundDark,
     borderRadius: 11,
     padding: 12,
+    justifyContent: "flex-start",
   },
 
   actions: {
@@ -187,13 +207,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  title: {
-    fontSize: 18,
-  },
 
   emptyText: {
     textAlign: "center",
-    color: "#aaa",
     marginTop: 20,
   },
   errorText: {

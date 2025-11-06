@@ -8,6 +8,7 @@ const Colors = {
   contrasting: "#ff9c7e",
 
   background: "#fff",
+  backgroundDark: "#333",
 
   textPrimary: "#1D1B20",
   textLight: "#999",
