@@ -1,10 +1,11 @@
 import { Link } from "@react-navigation/native";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
-import { Alert, ImageBackground, StyleSheet, Text, View } from "react-native";
+import { Alert, ImageBackground, StyleSheet, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TextInput } from "react-native-paper";
 import CustomBtn from "../components/ui/CustomBtn";
+import ThemedText from "../components/ui/ThemedText";
 import { useAuth } from "../contexts/authContext";
 import Colors from "../utils/colors";
 
@@ -67,12 +68,14 @@ export default function Register() {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.form}>
-          <Text style={styles.header}>
+          <ThemedText size={32} style={styles.header}>
             Join GeoLearn and start your journey
-          </Text>
+          </ThemedText>
 
           <View style={styles.row}>
-            <Text style={styles.label}>Name</Text>
+            <ThemedText.Medium size={18} style={styles.label}>
+              Name
+            </ThemedText.Medium>
             <TextInput
               style={styles.input}
               onChangeText={(text) => {
@@ -85,11 +88,21 @@ export default function Register() {
               right={<TextInput.Icon icon="account" />}
               mode="outlined"
             />
-            {error.name && <Text style={styles.error}>{error.name}</Text>}
+            {error.name && (
+              <ThemedText.Medium
+                size={12}
+                color={Colors.error}
+                style={styles.error}
+              >
+                {error.name}
+              </ThemedText.Medium>
+            )}
           </View>
 
           <View style={styles.row}>
-            <Text style={styles.label}>Email</Text>
+            <ThemedText.Medium size={18} style={styles.label}>
+              Email
+            </ThemedText.Medium>
             <TextInput
               style={styles.input}
               onChangeText={(text) => {
@@ -102,11 +115,21 @@ export default function Register() {
               right={<TextInput.Icon icon="email" />}
               mode="outlined"
             />
-            {error.email && <Text style={styles.error}>{error.email}</Text>}
+            {error.email && (
+              <ThemedText.Medium
+                size={12}
+                color={Colors.error}
+                style={styles.error}
+              >
+                {error.email}
+              </ThemedText.Medium>
+            )}
           </View>
 
           <View style={styles.row}>
-            <Text style={styles.label}>Password</Text>
+            <ThemedText.Medium size={18} style={styles.label}>
+              Password
+            </ThemedText.Medium>
             <TextInput
               style={styles.input}
               onChangeText={(text) => {
@@ -121,12 +144,20 @@ export default function Register() {
               mode="outlined"
             />
             {error.password && (
-              <Text style={styles.error}>{error.password}</Text>
+              <ThemedText.Medium
+                size={12}
+                color={Colors.error}
+                style={styles.error}
+              >
+                {error.password}
+              </ThemedText.Medium>
             )}
           </View>
 
           <View style={styles.row}>
-            <Text style={styles.label}>Repeat Password</Text>
+            <ThemedText.Medium size={18} style={styles.label}>
+              Repeat password
+            </ThemedText.Medium>
             <TextInput
               style={styles.input}
               onChangeText={setRepeatPassword}
@@ -142,14 +173,22 @@ export default function Register() {
             {loading ? "Loading..." : "Sign up"}
           </CustomBtn>
 
-          {authError && <Text style={styles.error}>{authError}</Text>}
+          {authError && (
+            <ThemedText.Medium
+              size={12}
+              color={Colors.error}
+              style={styles.error}
+            >
+              {authError}
+            </ThemedText.Medium>
+          )}
 
-          <Text>
+          <ThemedText.Medium>
             Have already account?{" "}
             <Link screen="login" style={styles.link}>
               Login
             </Link>
-          </Text>
+          </ThemedText.Medium>
         </View>
       </KeyboardAwareScrollView>
     </ImageBackground>
@@ -168,19 +207,14 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   header: {
-    color: Colors.textPrimary,
-    fontSize: 32,
     textAlign: "center",
   },
   form: {
     flexDirection: "column",
     alignItems: "center",
-    gap: 24,
+    gap: 16,
   },
   label: {
-    color: Colors.textPrimary,
-    fontSize: 18,
-    fontWeight: "500",
     marginLeft: -10,
   },
   input: {
@@ -195,8 +229,6 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
   error: {
-    color: Colors.error,
-    fontSize: 12,
     marginTop: 4,
   },
 });

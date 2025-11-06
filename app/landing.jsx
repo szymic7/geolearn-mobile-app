@@ -1,8 +1,9 @@
 import { router, useNavigation } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import { useEffect } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import CustomBtn from "../components/ui/CustomBtn";
+import ThemedText from "../components/ui/ThemedText";
 import { useAuth } from "../contexts/authContext";
 import Colors from "../utils/colors";
 
@@ -36,12 +37,12 @@ export default function Landing() {
           style={styles.image}
           source={require("../assets/images/geolearn-logo-transparent.png")}
         ></Image>
-        <Text style={styles.logoText}>
+        <ThemedText size={13} color={Colors.textInverse}>
           Your journey to world knowledge start here
-        </Text>
+        </ThemedText>
       </View>
       <View style={styles.actions}>
-        <Text style={styles.actionsText}>Lets get started</Text>
+        <ThemedText.SemiBold size={14}>Lets get started</ThemedText.SemiBold>
         <CustomBtn type="gray" onPress={() => navigation.navigate("login")}>
           Login
         </CustomBtn>
@@ -68,16 +69,6 @@ const styles = StyleSheet.create({
   image: {
     width: 300,
     height: 84,
-  },
-  logoText: {
-    color: Colors.textInverse,
-    fontFamily: "Montserrat-Regular",
-    fontSize: 13,
-  },
-  actionsText: {
-    color: Colors.textPrimary,
-    fontFamily: "Montserrat-SemiBold",
-    fontSize: 14,
   },
   actions: {
     flex: 1,

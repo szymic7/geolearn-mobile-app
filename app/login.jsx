@@ -5,13 +5,13 @@ import {
   ImageBackground,
   Keyboard,
   StyleSheet,
-  Text,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TextInput } from "react-native-paper";
 import CustomBtn from "../components/ui/CustomBtn";
+import ThemedText from "../components/ui/ThemedText";
 import { useAuth } from "../contexts/authContext";
 import Colors from "../utils/colors";
 
@@ -67,9 +67,13 @@ export default function Login() {
           keyboardShouldPersistTaps="handled"
         >
           <View style={styles.form}>
-            <Text style={styles.header}>Welcome back to GeoLearn</Text>
+            <ThemedText size={32} style={styles.header}>
+              Welcome back to GeoLearn
+            </ThemedText>
             <View style={styles.row}>
-              <Text style={styles.label}>Email</Text>
+              <ThemedText.Medium size={18} style={styles.label}>
+                Email
+              </ThemedText.Medium>
               <TextInput
                 style={styles.input}
                 onChangeText={(text) => {
@@ -83,10 +87,20 @@ export default function Login() {
                 right={<TextInput.Icon icon="email" />}
                 mode="outlined"
               />
-              {error.email && <Text style={styles.error}>{error.email}</Text>}
+              {error.email && (
+                <ThemedText.Medium
+                  size={12}
+                  color={Colors.error}
+                  style={styles.error}
+                >
+                  {error.email}
+                </ThemedText.Medium>
+              )}
             </View>
             <View style={styles.row}>
-              <Text style={styles.label}>Password</Text>
+              <ThemedText.Medium size={18} style={styles.label}>
+                Password
+              </ThemedText.Medium>
               <TextInput
                 style={styles.input}
                 onChangeText={(text) => {
@@ -102,19 +116,33 @@ export default function Login() {
               />
 
               {error.password && (
-                <Text style={styles.error}>{error.password}</Text>
+                <ThemedText.Medium
+                  size={12}
+                  color={Colors.error}
+                  style={styles.error}
+                >
+                  {error.password}
+                </ThemedText.Medium>
               )}
             </View>
             <CustomBtn type="green" onPress={handleSubmit} disabled={loading}>
               {loading ? "Loading..." : "Login"}
             </CustomBtn>
-            {authError && <Text style={styles.error}>{authError}</Text>}
-            <Text>
+            {authError && (
+              <ThemedText.Medium
+                size={12}
+                color={Colors.error}
+                style={styles.error}
+              >
+                {authError}
+              </ThemedText.Medium>
+            )}
+            <ThemedText.Medium>
               New in GeoLearn?{" "}
               <Link screen="register" style={styles.link}>
                 Sign up{" "}
               </Link>
-            </Text>
+            </ThemedText.Medium>
           </View>
         </KeyboardAwareScrollView>
       </ImageBackground>
@@ -128,8 +156,6 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   header: {
-    color: Colors.textPrimary,
-    fontSize: 32,
     textAlign: "center",
   },
   scrollContainer: {
@@ -152,9 +178,6 @@ const styles = StyleSheet.create({
     gap: 24,
   },
   label: {
-    color: Colors.textPrimary,
-    fontSize: 18,
-    fontWeight: 500,
     marginLeft: -10,
   },
   link: {
@@ -162,8 +185,6 @@ const styles = StyleSheet.create({
     color: Colors.textPrimary,
   },
   error: {
-    color: Colors.error,
-    fontSize: 12,
     marginTop: 4,
   },
 });

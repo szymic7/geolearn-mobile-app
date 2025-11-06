@@ -7,6 +7,7 @@ import ScreenLayout from "../../components/layout/ScreenLayout";
 import BurgerMenuButton from "../../components/ui/BurgerMenuButton";
 import QuizButton from "../../components/ui/QuizButton";
 import SubmitNextButton from "../../components/ui/SubmitNextButton";
+import ThemedText from "../../components/ui/ThemedText";
 import Timer from "../../components/ui/Timer";
 import { QUIZ_ENDPOINTS } from "../../constants/api";
 import { fetchAllQuestions } from "../../services/quizService";
@@ -43,7 +44,10 @@ export default function Quiz() {
             setQuestions(data);
           }
         } catch (err) {
-          setError("Failed to load quiz questions. Please try again later.");
+          setError(
+            err.message +
+              "Failed to load quiz questions. Please try again later."
+          );
         } finally {
           if (isActive) setLoading(false);
         }
@@ -117,9 +121,13 @@ export default function Quiz() {
     return (
       <View style={[styles.container, { justifyContent: "center" }]}>
         <ActivityIndicator size="large" color={Colors.primaryDark} />
-        <Text style={{ marginTop: 20, color: Colors.secondary }}>
+        <ThemedText
+          size={18}
+          color={Colors.secondary}
+          style={{ marginTop: 20 }}
+        >
           Loading questions...
-        </Text>
+        </ThemedText>
       </View>
     );
   }
@@ -127,10 +135,12 @@ export default function Quiz() {
   if (error) {
     return (
       <View style={[styles.container, { justifyContent: "center" }]}>
-        <Text style={{ color: "red", marginBottom: 10 }}>{error}</Text>
-        <Text style={{ color: Colors.secondary }}>
+        <ThemedText size={18} color={Colors.error} style={{ marginBottom: 10 }}>
+          {error}
+        </ThemedText>
+        <ThemedText size={18} color={Colors.secondary}>
           Please restart the quiz.
-        </Text>
+        </ThemedText>
       </View>
     );
   }
@@ -155,9 +165,9 @@ export default function Quiz() {
 
         <View style={styles.topSection}>
           <View style={styles.additions}>
-            <Text style={styles.addText}>
+            <ThemedText size={15}>
               {currentIndex + 1}/{questions.length}
-            </Text>
+            </ThemedText>
 
             <Timer
               key={currentIndex}
@@ -170,7 +180,9 @@ export default function Quiz() {
           </View>
 
           <View style={styles.questionContainer}>
-            <Text style={styles.questionStyle}>{question}</Text>
+            <ThemedText.Bold size={18} style={styles.questionStyle}>
+              {question}
+            </ThemedText.Bold>
           </View>
         </View>
 
@@ -218,14 +230,14 @@ const styles = StyleSheet.create({
   topSection: {
     width: "90%",
     flex: 1,
-    maxHeight: '40%',
+    maxHeight: "40%",
     flexDirection: "column",
     gap: 60,
   },
 
   additions: {
     width: "100%",
-    height: '35%',
+    height: "35%",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-end",
@@ -260,13 +272,6 @@ const styles = StyleSheet.create({
   questionStyle: {
     textAlign: "center",
     width: "100%",
-    fontSize: 18,
-    fontFamily: "Montserrat-Bold",
     letterSpacing: 0.2,
-  },
-
-  addText: {
-    fontSize: 15,
-    fontFamily: "Montserrat-Regular",
   },
 });

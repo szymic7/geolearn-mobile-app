@@ -1,4 +1,5 @@
-import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import { StyleSheet, TouchableHighlight, View } from "react-native";
+import ThemedText from "./ThemedText";
 
 export default function CustomBtn({
   type,
@@ -13,7 +14,9 @@ export default function CustomBtn({
       style={{ opacity: disabled ? 0.6 : 1 }}
     >
       <View style={[styles.btn, styles[type]]}>
-        <Text style={[textStyles.text, textStyles[type]]}>{children}</Text>
+        <ThemedText.SemiBold size={16} style={textStyles[type]}>
+          {children}
+        </ThemedText.SemiBold>
       </View>
     </TouchableHighlight>
   );
@@ -40,10 +43,6 @@ const styles = StyleSheet.create({
 });
 
 const textStyles = StyleSheet.create({
-  text: {
-    fontFamily: "Montserrat-SemiBold",
-    fontSize: 16,
-  },
   green: {
     color: "#fff",
   },

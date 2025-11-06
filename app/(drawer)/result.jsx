@@ -1,7 +1,8 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import ScreenLayout from "../../components/layout/ScreenLayout";
 import BurgerMenuButton from "../../components/ui/BurgerMenuButton";
+import ThemedText from "../../components/ui/ThemedText";
 import Colors from "../../utils/colors";
 
 export default function Result() {
@@ -19,25 +20,25 @@ export default function Result() {
         </View>
 
         <View style={styles.resultPanel}>
-          <Text style={[styles.font, styles.head, styles.congrats]}>
+          <ThemedText style={[styles.head, styles.congrats]}>
             Congratulations!
-          </Text>
-          <Text style={[styles.font, styles.head, styles.trophies]}>
-            🏆🏆🏆
-          </Text>
-          <Text style={[styles.font, styles.yscore]}>Your score:</Text>
-          <Text style={[styles.font, styles.percent]}>
+          </ThemedText>
+          <ThemedText style={[styles.head, styles.trophies]}>🏆🏆🏆</ThemedText>
+          <ThemedText style={[styles.yscore]}>Your score:</ThemedText>
+          <ThemedText style={[styles.percent]}>
             {Math.round((correct / total) * 100)}%
-          </Text>
-          <Text style={[styles.font, styles.yscore]}>
+          </ThemedText>
+          <ThemedText style={[styles.yscore]}>
             Correct answers:{" "}
-            <Text style={{ fontWeight: "bold" }}>
+            <ThemedText.Bold>
               {correct}/{total}
-            </Text>
-          </Text>
+            </ThemedText.Bold>
+          </ThemedText>
           <View style={styles.buttonContainer}>
             <Pressable style={styles.back} onPress={() => router.push("/")}>
-              <Text style={styles.buttonText}>Back to home</Text>
+              <ThemedText.Bold color={Colors.background} size={16}>
+                Back to home
+              </ThemedText.Bold>
             </Pressable>
           </View>
         </View>
@@ -134,11 +135,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: Colors.primaryLight,
-  },
-
-  buttonText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: Colors.background,
   },
 });
