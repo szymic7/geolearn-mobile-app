@@ -1,38 +1,5 @@
-import { useAuth } from "@/contexts/authContext";
-// import {Redirect} from "expo-router";
-import { Link } from "expo-router";
-import { Text, TouchableOpacity, View } from "react-native";
-
-import { useFonts } from "expo-font";
-import { montserratFonts } from "@/utils/loadFonts";
+import { Redirect } from "expo-router";
 
 export default function Index() {
-
-  const { logout } = useAuth();
-  const [fontsLoaded] = useFonts(montserratFonts);
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        gap: 20,
-      }}
-    >
-      <TouchableOpacity onPress={logout}>
-        <Text>Logout (auto login testing)</Text>
-      </TouchableOpacity>
-      <Link href="/landing">Click here to see auth landing page</Link>
-      <Link href="/login">Click here to see login page</Link>
-      <Link href="/register">Click here to see register page</Link>
-      <Link href="/home">Home</Link>
-      <Link href="/flagsRegionChoice">Learn flags</Link>
-      <Link href="/capitalsRegionChoice">Learn capitals</Link>
-      <Link href="/quizCategoryChoice">Quizzes</Link>
-      <Link href="/leaderboards">Leaderboards</Link>
-    </View>
-  );
-
-  // return <Redirect href="/home" />;
+  return <Redirect href="/landing" />;
 }

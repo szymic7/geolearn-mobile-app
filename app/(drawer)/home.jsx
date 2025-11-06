@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     width: "80%",
     height: "100%",
     justifyContent: "space-between",
+    marginVertical: 12,
   },
 
   tilesContainer: {

@@ -104,6 +104,7 @@ export default function Quiz() {
         if (!response.ok) {
           console.error("Failed to save result:", response.status);
         }
+        console.log(`Saved results ${category} / ${correctCount}`);
       } catch (error) {
         console.error("Error saving result:", error);
       }
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
 
   burgerArea: {
     position: "absolute",
-    top: 12,
+    top: 5,
     left: 13.5,
     zIndex: 10,
   },

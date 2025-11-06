@@ -35,7 +35,7 @@ export default function Result() {
             </ThemedText.Bold>
           </ThemedText>
           <View style={styles.buttonContainer}>
-            <Pressable style={styles.back} onPress={() => router.push("/")}>
+            <Pressable style={styles.back} onPress={() => router.push("/home")}>
               <ThemedText.Bold color={Colors.background} size={16}>
                 Back to home
               </ThemedText.Bold>

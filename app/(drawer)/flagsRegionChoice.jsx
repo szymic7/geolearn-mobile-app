@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
 
   burgerArea: {
     position: "absolute",
-    top: 12,
+    top: 5,
     left: 13.5,
     zIndex: 10,
   },
