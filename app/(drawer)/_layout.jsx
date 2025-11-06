@@ -1,6 +1,6 @@
 import { Drawer } from "expo-router/drawer";
 import { Icon } from "react-native-paper";
-import DrawerHeader from "../../components/ui/DrawerHeader";
+import DrawerHeader from "../../components/navigation/DrawerHeader";
 import Colors from "../../utils/colors";
 
 export default function DrawerLayout() {

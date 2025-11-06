@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, ScrollView, StyleSheet, View } from "react-native";
 import ScreenLayout from "../../components/layout/ScreenLayout";
-import BurgerMenuButton from "../../components/ui/BurgerMenuButton";
+import BurgerMenuButton from "../../components/navigation/BurgerMenuButton";
 import Header from "../../components/ui/Header";
 import HomeTileButton from "../../components/ui/HomeTileButton";
 import { fetchUserBestScores } from "../../services/quizService";
@@ -19,7 +19,7 @@ export default function QuizCategoryChoice() {
         const data = await fetchUserBestScores();
         setScores(data);
       } catch (error) {
-        console.error("❌ Failed to fetch user scores:", error);
+        console.error("Failed to fetch user scores:", error);
       } finally {
         setLoading(false);
       }

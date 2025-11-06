@@ -1,51 +1,54 @@
-import {Pressable, StyleSheet, Text} from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 import Colors from "../../utils/colors";
-import {useState} from "react";
 
-export default function SubmitNextButton({ submitted = false, onSubmit, onNext }) {
+export default function SubmitNextButton({
+  submitted = false,
+  onSubmit,
+  onNext,
+}) {
+  const handlePress = () => {
+    if (!submitted && onSubmit) {
+      onSubmit();
+    } else if (submitted && onNext) {
+      onNext();
+    }
+  };
 
-    const handlePress = () => {
-        if (!submitted && onSubmit) {
-            onSubmit();
-        } else if (submitted && onNext) {
-            onNext();
-        }
-    };
-
-    return (
-        <Pressable style={[styles.button, submitted ? styles.submitted : null]} onPress={handlePress}>
-            <Text style={[styles.text, , submitted ? styles.textSubmitted : null]}>
-                {submitted ? "Next" : "Submit"}
-            </Text>
-        </Pressable>
-    );
+  return (
+    <Pressable
+      style={[styles.button, submitted ? styles.submitted : null]}
+      onPress={handlePress}
+    >
+      <Text style={[styles.text, , submitted ? styles.textSubmitted : null]}>
+        {submitted ? "Next" : "Submit"}
+      </Text>
+    </Pressable>
+  );
 }
 
 const styles = StyleSheet.create({
+  button: {
+    height: 65,
+    width: 140,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 2,
+    borderRadius: 19,
+    borderColor: Colors.textPrimary,
+    backgroundColor: Colors.primaryLight,
+  },
 
-    button: {
-        height: 65,
-        width: 140,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 2,
-        borderRadius: 19,
-        borderColor: Colors.textPrimary,
-        backgroundColor: Colors.primaryLight,
-    },
+  submitted: {
+    backgroundColor: Colors.secondary,
+  },
 
-    submitted:
-    {
-        backgroundColor: Colors.secondary,
-    },
+  text: {
+    fontFamily: "Montserrat-Bold",
+    fontSize: 15,
+    color: Colors.background,
+  },
 
-    text: {
-        fontFamily: 'Montserrat-Bold',
-        fontSize: 15,
-        color: Colors.background,
-    },
-
-    textSubmitted: {
-        color: Colors.primaryLight,
-    }
+  textSubmitted: {
+    color: Colors.primaryLight,
+  },
 });

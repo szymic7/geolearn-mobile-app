@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import ScreenLayout from "../../components/layout/ScreenLayout";
-import BurgerMenuButton from "../../components/ui/BurgerMenuButton";
+import BurgerMenuButton from "../../components/navigation/BurgerMenuButton";
 import ThemedText from "../../components/ui/ThemedText";
 import Colors from "../../utils/colors";
 

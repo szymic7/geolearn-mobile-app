@@ -8,7 +8,7 @@ import { Icon } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "../../contexts/authContext";
 import Colors from "../../utils/colors";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "../ui/LogoutButton";
 
 export default function DrawerHeader(props) {
   const { user } = useAuth();

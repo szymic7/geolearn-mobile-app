@@ -2,9 +2,9 @@ import { useFocusEffect } from "@react-navigation/native";
 import { useLocalSearchParams } from "expo-router";
 import { useCallback, useState } from "react";
 import { ActivityIndicator, Alert, StyleSheet, Text, View } from "react-native";
+import CapitalsViewer from "../../components/CapitalsViewer";
 import ScreenLayout from "../../components/layout/ScreenLayout";
-import BurgerMenuButton from "../../components/ui/BurgerMenuButton";
-import CapitalsViewer from "../../components/ui/CapitalsViewer";
+import BurgerMenuButton from "../../components/navigation/BurgerMenuButton";
 import { CAPITALS_ENDPOINTS } from "../../constants/api";
 import Colors from "../../utils/colors";
 
@@ -30,7 +30,8 @@ export default function Capitals() {
           setLoading(true);
           setCountries([]);
 
-          const url = REGION_TO_URL_MAP[region] || CAPITALS_ENDPOINTS.ALL_CAPITALS;
+          const url =
+            REGION_TO_URL_MAP[region] || CAPITALS_ENDPOINTS.ALL_CAPITALS;
           const response = await fetch(url);
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);

@@ -1,6 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Animated, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Colors from '../../utils/colors';
+import { useEffect, useRef, useState } from "react";
+import {
+  ActivityIndicator,
+  Animated,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import Colors from "../utils/colors";
 
 export default function CapitalsViewer({ countries }) {
   const [index, setIndex] = useState(0);
@@ -45,9 +53,13 @@ export default function CapitalsViewer({ countries }) {
       setCapitalImage(imageSrc);
 
       // 👇 Fade in only after we have the new image
-      Animated.timing(fadeAnim, { toValue: 1, duration: 300, useNativeDriver: true }).start();
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
     } catch (error) {
-      console.error('Error fetching image for capital:', error);
+      console.error("Error fetching image for capital:", error);
       setCapitalImage(null);
     } finally {
       setLoading(false);
@@ -60,40 +72,50 @@ export default function CapitalsViewer({ countries }) {
   }, [index, country.capital]);
 
   const nextCapital = () => {
-    Animated.timing(fadeAnim, { toValue: 0, duration: 200, useNativeDriver: true }).start(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 200,
+      useNativeDriver: true,
+    }).start(() => {
       setIndex((prev) => (prev + 1) % countries.length);
     });
   };
 
   const prevCapital = () => {
-    Animated.timing(fadeAnim, { toValue: 0, duration: 200, useNativeDriver: true }).start(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 200,
+      useNativeDriver: true,
+    }).start(() => {
       setIndex((prev) => (prev - 1 + countries.length) % countries.length);
     });
   };
 
   const getCroppedCapital = (capital) => {
-    if (!capital) return '';
-    const commaIndex = capital.indexOf(',');
-    return commaIndex !== -1 ? capital.slice(0, commaIndex).trim() : capital.trim();
+    if (!capital) return "";
+    const commaIndex = capital.indexOf(",");
+    return commaIndex !== -1
+      ? capital.slice(0, commaIndex).trim()
+      : capital.trim();
   };
 
   return (
     <View style={styles.container}>
       {/* Country name with small flag */}
       <View style={styles.countryHeader}>
-        <Text style={styles.countryName}>
-            {country.name}
-        </Text>
+        <Text style={styles.countryName}>{country.name}</Text>
         <View style={styles.smallFlagContainer}>
-            <Image
-                source={{ uri: `https://flagcdn.com/w80/${iso2}.png` }}
-                style={styles.smallFlag}
-            />
+          <Image
+            source={{ uri: `https://flagcdn.com/w80/${iso2}.png` }}
+            style={styles.smallFlag}
+          />
         </View>
       </View>
 
       {/* Capital name */}
-      <Text style={styles.capitalName}>{getCroppedCapital(country.capital)}</Text>
+      <Text style={styles.capitalName}>
+        {getCroppedCapital(country.capital)}
+      </Text>
 
       {/* Image with navigation */}
       <View style={styles.imageWithArrows}>
@@ -129,53 +151,52 @@ export default function CapitalsViewer({ countries }) {
 }
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     backgroundColor: Colors.contrasting,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     width: "100%",
     height: "100%",
     borderRadius: 10,
     padding: 10,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
   },
 
   countryHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: 20,
   },
 
   countryName: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: Colors.secondary,
     marginRight: 10,
-    textAlign: 'center',
+    textAlign: "center",
     flexShrink: 1,
-    textShadowColor: 'rgba(0, 0, 0, 0.3)',
+    textShadowColor: "rgba(0, 0, 0, 0.3)",
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 3,
   },
 
   smallFlagContainer: {
     width: 80,
-    height: 60
+    height: 60,
   },
 
   smallFlag: {
     flex: 1,
     width: undefined,
     height: undefined,
-    resizeMode: 'contain',
+    resizeMode: "contain",
     padding: 3,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
@@ -183,19 +204,19 @@ const styles = StyleSheet.create({
 
   capitalName: {
     fontSize: 32,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: Colors.secondary,
     marginBottom: 10,
-    textAlign: 'center',
-    textShadowColor: 'rgba(0, 0, 0, 0.3)',
+    textAlign: "center",
+    textShadowColor: "rgba(0, 0, 0, 0.3)",
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 3,
   },
 
   imageWithArrows: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: 10,
   },
 
@@ -206,7 +227,7 @@ const styles = StyleSheet.create({
   prevNextButtonText: {
     fontSize: 40,
     color: Colors.secondary,
-    textShadowColor: 'rgba(0,0,0,0.3)',
+    textShadowColor: "rgba(0,0,0,0.3)",
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 3,
   },
@@ -214,17 +235,17 @@ const styles = StyleSheet.create({
   capitalImageContainer: {
     width: 200,
     height: 150,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
 
   capitalImage: {
     flex: 1,
     width: undefined,
     height: undefined,
-    resizeMode: 'contain',
+    resizeMode: "contain",
     padding: 3,
     // shadow - iOS
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
@@ -233,12 +254,11 @@ const styles = StyleSheet.create({
   },
 
   noImageText: {
-    color: '#888',
+    color: "#888",
   },
 
   indexCounter: {
     fontSize: 16,
     color: Colors.secondary,
   },
-
 });

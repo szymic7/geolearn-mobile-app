@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import Colors from "../../utils/colors";
+import Colors from "../utils/colors";
 
 export default function FlagsViewer({ countries }) {
   const [index, setIndex] = useState(0);

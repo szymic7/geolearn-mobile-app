@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import Colors from "../../utils/colors";
 import { getProgressColor } from "../../utils/getProgressColor";
-import QuizProgressBar from "./QuizProgressBar";
+import QuizProgressBar from "../QuizProgressBar";
 
 export default function ContinentsTileButton({
   title,

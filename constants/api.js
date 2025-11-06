@@ -1,17 +1,17 @@
-export const API_BASE_URL = "http://74.248.139.184:8000";
+export const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL;
 
 const AUTH_BASE = `${API_BASE_URL}/auth`;
 
 const COUNTRIES_BASE = `${API_BASE_URL}/countries`;
-const COUNTRIES_CAPITALS_BASE = `${COUNTRIES_BASE}/capitals`
+const COUNTRIES_CAPITALS_BASE = `${COUNTRIES_BASE}/capitals`;
 
 const QUIZ_BASE = `${API_BASE_URL}/quiz`;
 
 export const AUTH_ENDPOINTS = {
   LOGIN: `${AUTH_BASE}/login`,
   REGISTER: `${AUTH_BASE}/register`,
-  ME: `${AUTH_BASE}/me`
-}
+  ME: `${AUTH_BASE}/me`,
+};
 
 export const FLAGS_ENDPOINTS = {
   ALL_FLAGS: `${COUNTRIES_BASE}`,
@@ -37,4 +37,4 @@ export const QUIZ_ENDPOINTS = {
   MY_BEST: `${QUIZ_BASE}/my-best`,
   LEADERBOARD: `${QUIZ_BASE}/leaderboards`,
   SUBMIT: `${QUIZ_BASE}/submit`,
-}
+};

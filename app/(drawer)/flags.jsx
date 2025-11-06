@@ -2,9 +2,9 @@ import { useFocusEffect } from "@react-navigation/native";
 import { useLocalSearchParams } from "expo-router";
 import { useCallback, useState } from "react";
 import { ActivityIndicator, Alert, StyleSheet, Text, View } from "react-native";
+import FlagsViewer from "../../components/FlagsViewer";
 import ScreenLayout from "../../components/layout/ScreenLayout";
-import BurgerMenuButton from "../../components/ui/BurgerMenuButton";
-import FlagsViewer from "../../components/ui/FlagsViewer";
+import BurgerMenuButton from "../../components/navigation/BurgerMenuButton";
 import { FLAGS_ENDPOINTS } from "../../constants/api";
 import Colors from "../../utils/colors";
 

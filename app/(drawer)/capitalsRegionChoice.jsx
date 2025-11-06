@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { ScrollView, StyleSheet, View } from "react-native";
 import ScreenLayout from "../../components/layout/ScreenLayout";
-import BurgerMenuButton from "../../components/ui/BurgerMenuButton";
+import BurgerMenuButton from "../../components/navigation/BurgerMenuButton";
 import ContinentsTileButton from "../../components/ui/ContinentsTileButton";
 import Header from "../../components/ui/Header";
 import Colors from "../../utils/colors";
