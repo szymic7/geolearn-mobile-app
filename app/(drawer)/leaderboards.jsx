@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useFocusEffect } from "expo-router";
+import { useCallback, useState } from "react";
 import {
   FlatList,
   StyleSheet,
@@ -25,27 +26,29 @@ export default function Leaderboards() {
     activeCategory.slice(1) +
     " Leaderboard";
 
-  useEffect(function () {
-    async function fetchScores() {
-      setLoading(true);
-      setError("");
-      try {
-        const res = await fetch(`${API_BASE_URL}/quiz/leaderboards`);
+  useFocusEffect(
+    useCallback(() => {
+      async function fetchScores() {
+        setLoading(true);
+        setError("");
+        try {
+          const res = await fetch(`${API_BASE_URL}/quiz/leaderboards`);
+          if (!res.ok)
+            throw new Error("Something went wrong with fetching data");
 
-        if (!res.ok) {
-          throw new Error("Something went wrong with fetching data");
+          const data = await res.json();
+          setScores(data);
+        } catch (err) {
+          console.log(err.message);
+          setError(err.message);
+        } finally {
+          setLoading(false);
         }
-
-        const data = await res.json();
-        setScores(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
       }
-    }
-    fetchScores();
-  }, []);
+
+      fetchScores();
+    }, [])
+  );
 
   return (
     <ScreenLayout style={{ backgroundColor: Colors.primaryLight }}>
